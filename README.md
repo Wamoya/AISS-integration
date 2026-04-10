@@ -2,6 +2,13 @@
 
 Deliverable for the AISS subject.
 
+## Index
+
+- [Project information](#project-information)
+- [Notes](#notes)
+- [TODO list](#todo-list)
+- [Git cheatsheet](#git-cheatsheet)
+
 ## Project information
 
 - Video Miner *(default port: 8080)*
@@ -12,6 +19,21 @@ Deliverable for the AISS subject.
 
 - 3rd commit addded the generated *(using https://start.spring.io)* project files for projects `dailymotionminer/` and `peertubeminer/`.
 Both of them have been added to the repository, and have "H2 Database" as a dependency in case we want to use it throughout the development of the project. We may remove it in the future if it remains unused.
+
+## TODO list
+
+- [ ] Video Miner
+  - [ ] _placeholder_
+- [ ] Peertube Miner
+  - [ ] _placeholder_
+- [ ] Daily motion miner
+  - [ ] _placeholder_
+     
+### Before submitting
+
+- [ ] Clean README.md
+  - [ ] Remove Git cheatsheet
+- [ ] Consider removing the "H2 Database" dependency of both adapter microservices.
 
 ## [Git cheatsheet](https://education.github.com/git-cheat-sheet-education.pdf)
 
