@@ -24,7 +24,7 @@ Both of them have been added to the repository, and have "H2 Database" as a depe
 | `git diff --cached` | Show staged changes. |
 | `git commit -m "<short descriptive message>"` ⭐ | Commit staged changes. |
 | `git push origin main` ⭐ | Push local commits to the main branch. |
-| `git pull` ⭐ | Pull changes from remote repo to local repo. |
+| `git pull origin main` ⭐ | Pull changes from remote repo to local repo. |
 
 If you mess anything up: *(hard reset solution)*
 1. Backup any changes you want to keep.
