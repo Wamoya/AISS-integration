@@ -22,6 +22,11 @@ public class Comment {
     @JsonProperty("createdOn")
     private String createdOn;
 
+    @JsonProperty("author")
+    @ManyToOne(cascade = CascadeType.ALL) // One author <-> Many comments // TODO: Consider removing cascade. Deleting a comment should not delete the author too.
+    @NotNull(message = "Comment author cannot be null")
+    private User author;
+    
     public String getId() {
         return id;
     }

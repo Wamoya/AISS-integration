@@ -31,8 +31,8 @@ public class Video {
     private String releaseTime;
 
     @JsonProperty("author")
-    @OneToOne(cascade = CascadeType.ALL)
-    @NotNull(message = "Comment author cannot be null")
+    @ManyToOne(cascade = CascadeType.ALL) // One author <-> Many videos // TODO: Consider removing cascade. Deleting a comment should not delete the author too.
+    @NotNull(message = "Video author cannot be null")
     private User author;
 
     @JsonProperty("comments")
