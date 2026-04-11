@@ -23,10 +23,10 @@ Deliverable for the AISS subject.
 
 ## Notes:
 
-- 3rd commit added the generated *(using https://start.spring.io)* project files for projects `dailymotionminer/` and `peertubeminer/`.
+- Commit [66cd411](https://github.com/Wamoya/AISS-integration/commit/66cd411b1247faf7229a0f3c663fc3b202c999fe) added the generated *(using https://start.spring.io)* project files for projects `dailymotionminer/` and `peertubeminer/`.
 Both of them have been added to the repository, and have "H2 Database" as a dependency in case we want to use it throughout the development of the project. We may remove it in the future if it remains unused.
 - Some properties in the models proposed in the template for Video Miner are not mentioned on the project instructions, such as the relation between *Comment* and *User*. Initially there were had getters and setters in *Comment* for the "author" property, which wasn't defined anywhere.
-- As for commit 11, we are not sure of the meaning of the OneToOne relation between Video and User specified in the project instructions.
+- As for commit [c2ec393](https://github.com/Wamoya/AISS-integration/commit/c2ec393d75074da54884950ba0837904ed158f8a), we are not sure of the meaning of the OneToOne relation between Video and User specified in the project instructions.
 
 ## TODO list
 
@@ -50,7 +50,8 @@ Both of them have been added to the repository, and have "H2 Database" as a depe
 | `git status` ⭐ | Show useful status info. |
 | `git add .` ⭐ | Stage all changes. |
 | `git add <file>` | Stage changes made to \<file\>. |
-| `git diff` | Show unestaged changes. |
+| `git reset <file>` | Unstage changes made to \<file\>. |
+| `git diff` | Show unstaged changes. |
 | `git diff --cached` | Show staged changes. |
 | `git commit -m "<short descriptive message>"` ⭐ | Commit staged changes. |
 | `git push origin main` ⭐ | Push local commits to the main branch. |
