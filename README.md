@@ -19,7 +19,7 @@ Deliverable for the AISS subject.
 
 #### Video Miner
 
-![[assets/data_model-videominer.png]]
+![Main data model](./assets/data_model-videominer.png "Main data model")
 
 ## Notes:
 
