@@ -9,11 +9,17 @@ Deliverable for the AISS subject.
 - [TODO list](#todo-list)
 - [Git cheatsheet](#git-cheatsheet)
 
-## Project information
+## Project specifications
 
 - Video Miner *(default port: 8080)*
 - Peertube Miner *(default port: 8081)*
-- Daily motion Miner *(default port: 8082)*
+- Dailymotion Miner *(default port: 8082)*
+
+### Data models
+
+#### Video Miner
+
+![[assets/data_model-videominer.png]]
 
 ## Notes:
 
