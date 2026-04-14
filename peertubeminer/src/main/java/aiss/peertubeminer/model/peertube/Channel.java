@@ -3,6 +3,8 @@ package aiss.peertubeminer.model.peertube;
 
 import java.util.List;
 import javax.annotation.processing.Generated;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -11,26 +13,27 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonPropertyOrder({
     "id",
     "name",
-    "displayName",
-    "url",
-    "host",
-    "avatars"
+//    "displayName",
+//    "url",
+//    "host",
+//    "avatars"
 })
 @Generated("jsonschema2pojo")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Channel {
 
     @JsonProperty("id")
     private Integer id;
     @JsonProperty("name")
     private String name;
-    @JsonProperty("displayName")
-    private String displayName;
-    @JsonProperty("url")
-    private String url;
-    @JsonProperty("host")
-    private String host;
-    @JsonProperty("avatars")
-    private List<Pictures> avatars;
+//    @JsonProperty("displayName")
+//    private String displayName;
+//    @JsonProperty("url")
+//    private String url;
+//    @JsonProperty("host")
+//    private String host;
+//    @JsonProperty("avatars")
+//    private List<Pictures> avatars;
 
     @JsonProperty("id")
     public Integer getId() {
@@ -52,45 +55,45 @@ public class Channel {
         this.name = name;
     }
 
-    @JsonProperty("displayName")
-    public String getDisplayName() {
-        return displayName;
-    }
-
-    @JsonProperty("displayName")
-    public void setDisplayName(String displayName) {
-        this.displayName = displayName;
-    }
-
-    @JsonProperty("url")
-    public String getUrl() {
-        return url;
-    }
-
-    @JsonProperty("url")
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    @JsonProperty("host")
-    public String getHost() {
-        return host;
-    }
-
-    @JsonProperty("host")
-    public void setHost(String host) {
-        this.host = host;
-    }
-
-    @JsonProperty("avatars")
-    public List<Pictures> getAvatars() {
-        return avatars;
-    }
-
-    @JsonProperty("avatars")
-    public void setAvatars(List<Pictures> avatars) {
-        this.avatars = avatars;
-    }
+//    @JsonProperty("displayName")
+//    public String getDisplayName() {
+//        return displayName;
+//    }
+//
+//    @JsonProperty("displayName")
+//    public void setDisplayName(String displayName) {
+//        this.displayName = displayName;
+//    }
+//
+//    @JsonProperty("url")
+//    public String getUrl() {
+//        return url;
+//    }
+//
+//    @JsonProperty("url")
+//    public void setUrl(String url) {
+//        this.url = url;
+//    }
+//
+//    @JsonProperty("host")
+//    public String getHost() {
+//        return host;
+//    }
+//
+//    @JsonProperty("host")
+//    public void setHost(String host) {
+//        this.host = host;
+//    }
+//
+//    @JsonProperty("avatars")
+//    public List<Pictures> getAvatars() {
+//        return avatars;
+//    }
+//
+//    @JsonProperty("avatars")
+//    public void setAvatars(List<Pictures> avatars) {
+//        this.avatars = avatars;
+//    }
 
     @Override
     public String toString() {
@@ -104,22 +107,22 @@ public class Channel {
         sb.append('=');
         sb.append(((this.name == null)?"<null>":this.name));
         sb.append(',');
-        sb.append("displayName");
-        sb.append('=');
-        sb.append(((this.displayName == null)?"<null>":this.displayName));
-        sb.append(',');
-        sb.append("url");
-        sb.append('=');
-        sb.append(((this.url == null)?"<null>":this.url));
-        sb.append(',');
-        sb.append("host");
-        sb.append('=');
-        sb.append(((this.host == null)?"<null>":this.host));
-        sb.append(',');
-        sb.append("avatars");
-        sb.append('=');
-        sb.append(((this.avatars == null)?"<null>":this.avatars));
-        sb.append(',');
+//        sb.append("displayName");
+//        sb.append('=');
+//        sb.append(((this.displayName == null)?"<null>":this.displayName));
+//        sb.append(',');
+//        sb.append("url");
+//        sb.append('=');
+//        sb.append(((this.url == null)?"<null>":this.url));
+//        sb.append(',');
+//        sb.append("host");
+//        sb.append('=');
+//        sb.append(((this.host == null)?"<null>":this.host));
+//        sb.append(',');
+//        sb.append("avatars");
+//        sb.append('=');
+//        sb.append(((this.avatars == null)?"<null>":this.avatars));
+//        sb.append(',');
         if (sb.charAt((sb.length()- 1)) == ',') {
             sb.setCharAt((sb.length()- 1), ']');
         } else {
