@@ -16,7 +16,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "updatedAt"
 })
 @Generated("jsonschema2pojo")
-public class Pictures {
+public class Picture {
 
     @JsonProperty("path")
     private String path;
@@ -94,7 +94,7 @@ public class Pictures {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(Pictures.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+        sb.append(Picture.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
         sb.append("path");
         sb.append('=');
         sb.append(((this.path == null)?"<null>":this.path));

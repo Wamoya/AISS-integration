@@ -2,59 +2,30 @@
 package aiss.peertubeminer.model.peertube;
 
 import java.util.List;
-import javax.annotation.processing.Generated;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({
-    "id",
-    "url",
-    "name",
-    "avatars", // -> Access to picture_link
-//    "host",
-//    "hostRedundancyAllowed",
-//    "followingCount",
-//    "followersCount",
-//    "createdAt",
-//    "updatedAt",
-//    "userId",
-//    "displayName",
-//    "description"
-})
-@Generated("jsonschema2pojo")
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class User {
 
     @JsonProperty("id")
     private Integer id;
-    @JsonProperty("url")
-    private String url;
     @JsonProperty("name")
     private String name;
-    @JsonProperty("avatars")
-    private List<Pictures> avatars;
-//    @JsonProperty("host")
-//    private String host;
-//    @JsonProperty("hostRedundancyAllowed")
-//    private Boolean hostRedundancyAllowed;
-//    @JsonProperty("followingCount")
-//    private Integer followingCount;
-//    @JsonProperty("followersCount")
-//    private Integer followersCount;
-//    @JsonProperty("createdAt")
-//    private String createdAt;
-//    @JsonProperty("updatedAt")
-//    private String updatedAt;
-//    @JsonProperty("userId")
-//    private Integer userId;
-//    @JsonProperty("displayName")
-//    private String displayName;
-//    @JsonProperty("description")
-//    private String description;
+    @JsonProperty("url") // -> user_link
+    private String url;
+    @JsonProperty("avatars") // -> picture_link = link of one of the avatars
+    private List<Picture> avatars;
+
+    public User(Integer id, String name, String url, List<Picture> avatars) {
+        this.id = id;
+        this.name = name;
+        this.url = url;
+        this.avatars = avatars;
+    }
 
     @JsonProperty("id")
     public Integer getId() {
@@ -87,104 +58,14 @@ public class User {
     }
 
     @JsonProperty("avatars")
-    public List<Pictures> getAvatars() {
+    public List<Picture> getAvatars() {
         return avatars;
     }
 
     @JsonProperty("avatars")
-    public void setAvatars(List<Pictures> avatars) {
+    public void setAvatars(List<Picture> avatars) {
         this.avatars = avatars;
     }
-
-//    @JsonProperty("host")
-//    public String getHost() {
-//        return host;
-//    }
-//
-//    @JsonProperty("host")
-//    public void setHost(String host) {
-//        this.host = host;
-//    }
-//
-//    @JsonProperty("hostRedundancyAllowed")
-//    public Boolean getHostRedundancyAllowed() {
-//        return hostRedundancyAllowed;
-//    }
-//
-//    @JsonProperty("hostRedundancyAllowed")
-//    public void setHostRedundancyAllowed(Boolean hostRedundancyAllowed) {
-//        this.hostRedundancyAllowed = hostRedundancyAllowed;
-//    }
-//
-//    @JsonProperty("followingCount")
-//    public Integer getFollowingCount() {
-//        return followingCount;
-//    }
-//
-//    @JsonProperty("followingCount")
-//    public void setFollowingCount(Integer followingCount) {
-//        this.followingCount = followingCount;
-//    }
-//
-//    @JsonProperty("followersCount")
-//    public Integer getFollowersCount() {
-//        return followersCount;
-//    }
-//
-//    @JsonProperty("followersCount")
-//    public void setFollowersCount(Integer followersCount) {
-//        this.followersCount = followersCount;
-//    }
-//
-//    @JsonProperty("createdAt")
-//    public String getCreatedAt() {
-//        return createdAt;
-//    }
-//
-//    @JsonProperty("createdAt")
-//    public void setCreatedAt(String createdAt) {
-//        this.createdAt = createdAt;
-//    }
-//
-//    @JsonProperty("updatedAt")
-//    public String getUpdatedAt() {
-//        return updatedAt;
-//    }
-//
-//    @JsonProperty("updatedAt")
-//    public void setUpdatedAt(String updatedAt) {
-//        this.updatedAt = updatedAt;
-//    }
-//
-//    @JsonProperty("userId")
-//    public Integer getUserId() {
-//        return userId;
-//    }
-//
-//    @JsonProperty("userId")
-//    public void setUserId(Integer userId) {
-//        this.userId = userId;
-//    }
-//
-//    @JsonProperty("displayName")
-//    public String getDisplayName() {
-//        return displayName;
-//    }
-//
-//    @JsonProperty("displayName")
-//    public void setDisplayName(String displayName) {
-//        this.displayName = displayName;
-//    }
-//
-//    @JsonProperty("description")
-//    public String getDescription() {
-//        return description;
-//    }
-//
-//    @JsonProperty("description")
-//    public void setDescription(String description) {
-//        this.description = description;
-//    }
 
     @Override
     public String toString() {
@@ -206,42 +87,6 @@ public class User {
         sb.append('=');
         sb.append(((this.avatars == null)?"<null>":this.avatars));
         sb.append(',');
-//        sb.append("host");
-//        sb.append('=');
-//        sb.append(((this.host == null)?"<null>":this.host));
-//        sb.append(',');
-//        sb.append("hostRedundancyAllowed");
-//        sb.append('=');
-//        sb.append(((this.hostRedundancyAllowed == null)?"<null>":this.hostRedundancyAllowed));
-//        sb.append(',');
-//        sb.append("followingCount");
-//        sb.append('=');
-//        sb.append(((this.followingCount == null)?"<null>":this.followingCount));
-//        sb.append(',');
-//        sb.append("followersCount");
-//        sb.append('=');
-//        sb.append(((this.followersCount == null)?"<null>":this.followersCount));
-//        sb.append(',');
-//        sb.append("createdAt");
-//        sb.append('=');
-//        sb.append(((this.createdAt == null)?"<null>":this.createdAt));
-//        sb.append(',');
-//        sb.append("updatedAt");
-//        sb.append('=');
-//        sb.append(((this.updatedAt == null)?"<null>":this.updatedAt));
-//        sb.append(',');
-//        sb.append("userId");
-//        sb.append('=');
-//        sb.append(((this.userId == null)?"<null>":this.userId));
-//        sb.append(',');
-//        sb.append("displayName");
-//        sb.append('=');
-//        sb.append(((this.displayName == null)?"<null>":this.displayName));
-//        sb.append(',');
-//        sb.append("description");
-//        sb.append('=');
-//        sb.append(((this.description == null)?"<null>":this.description));
-//        sb.append(',');
         if (sb.charAt((sb.length()- 1)) == ',') {
             sb.setCharAt((sb.length()- 1), ']');
         } else {
