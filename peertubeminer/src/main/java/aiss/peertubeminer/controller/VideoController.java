@@ -24,7 +24,7 @@ public class VideoController {
 
     @GetMapping("/videos/{id}")
     public Video findById(@PathVariable Integer id) {
-        return videoRepository.findOnetById(id);
+        return videoRepository.findOneById(id);
     }
 
 //    @GetMapping("/{id}/videos") // id is a String type, and PeerTube receives it as the channelHandle
