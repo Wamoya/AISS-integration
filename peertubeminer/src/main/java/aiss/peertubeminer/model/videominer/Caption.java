@@ -1,20 +1,18 @@
-package aiss.videominer.model;
+package aiss.peertubeminer.model.videominer;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-/**
- * @author Juan C. Alonso
- */
+
 @Entity
 @Table(name = "Caption")
 public class Caption {
 
     @Id
     @JsonProperty("id")
-    private Long id;
+    private String id;
 
     @JsonProperty("name")
     private String name;
@@ -22,19 +20,12 @@ public class Caption {
     @JsonProperty("language")
     private String language;
 
-    public Caption() {
-    }
 
-    public Caption(String name, String language) {
-        this.name = name;
-        this.language = language;
-    }
-
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

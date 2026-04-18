@@ -1,23 +1,19 @@
-package aiss.videominer.model;
+package aiss.peertubeminer.model.videominer;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
-import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author Juan C. Alonso
- */
 @Entity
 @Table(name = "Video")
 public class Video {
 
     @Id
     @JsonProperty("id")
-    private Long id;
+    private String id;
 
     @JsonProperty("name")
     @NotEmpty(message = "Video name cannot be empty")
@@ -31,11 +27,6 @@ public class Video {
     @NotEmpty(message = "Video release time cannot be empty")
     private String releaseTime;
 
-    // On DB, each video has a User. (MVP required by project instructions)
-    // - In the future, we could expand the data model from this point
-    // - One user <-> Many videos
-    // - One user <-> Many comments
-    // - One user <-> Many channels (Maybe?)
     @JsonProperty("author")
     @OneToOne(cascade = CascadeType.ALL)
     @NotNull(message = "Video author cannot be null")
@@ -53,23 +44,11 @@ public class Video {
     @NotNull(message = "Video captions cannot be null")
     private List<Caption> captions;
 
-    public Video() {
-        this.comments = new ArrayList<>();
-        this.captions = new ArrayList<>();
-    }
-
-    public Video(String name, String description, String releaseTime, Channel author, List<Comment> comments, List<Caption> captions) {
-        this.name = name;
-        this.description = description;
-        this.releaseTime = releaseTime;
-        this.author = author;
-    }
-
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

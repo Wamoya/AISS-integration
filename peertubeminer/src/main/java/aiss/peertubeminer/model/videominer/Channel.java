@@ -1,4 +1,4 @@
-package aiss.videominer.model;
+package aiss.peertubeminer.model.videominer;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
@@ -8,16 +8,14 @@ import jakarta.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author Juan C. Alonso
- */
+
 @Entity
 @Table(name = "Channel")
 public class Channel {
 
     @Id
     @JsonProperty("id")
-    private Long id;
+    private String id;
 
     @JsonProperty("name")
     @NotEmpty(message = "Channel name cannot be empty")
@@ -41,17 +39,11 @@ public class Channel {
         this.videos = new ArrayList<>();
     }
 
-    public Channel(String name, String description, String createdTime) {
-        this.name = name;
-        this.description = description;
-        this.createdTime = createdTime;
-    }
-
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

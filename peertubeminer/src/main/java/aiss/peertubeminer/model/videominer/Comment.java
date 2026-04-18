@@ -1,8 +1,7 @@
-package aiss.videominer.model;
+package aiss.peertubeminer.model.videominer;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 
 /**
  * @author Juan C. Alonso
@@ -13,7 +12,7 @@ public class Comment {
 
     @Id
     @JsonProperty("id")
-    private Long id;
+    private String id;
 
     @JsonProperty("text")
     @Column(columnDefinition="TEXT")
@@ -21,26 +20,12 @@ public class Comment {
 
     @JsonProperty("createdOn")
     private String createdOn;
-
-    public Comment() {
-    }
-
-    public Comment(String text, String createdOn) {
-        this.text = text;
-        this.createdOn = createdOn;
-    }
-
-    // Possible future extension point for the data model. (See comments in ./Video.java)
-//    @JsonProperty("author")
-//    @ManyToOne(cascade = CascadeType.ALL) // One author <-> Many comments
-//    @NotNull(message = "Comment author cannot be null")
-//    private User author;
     
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
