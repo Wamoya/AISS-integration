@@ -25,8 +25,6 @@ Deliverable for the AISS subject.
 
 - Commit [66cd411](https://github.com/Wamoya/AISS-integration/commit/66cd411b1247faf7229a0f3c663fc3b202c999fe) added the generated *(using https://start.spring.io)* project files for projects `dailymotionminer/` and `peertubeminer/`.
 Both of them have been added to the repository, and have "H2 Database" as a dependency in case we want to use it throughout the development of the project. We may remove it in the future if it remains unused.
-- Some properties in the models proposed in the template for Video Miner are not mentioned on the project instructions, such as the relation between *Comment* and *User*. Initially there were had getters and setters in *Comment* for the "author" property, which wasn't defined anywhere.
-- As for commit [c2ec393](https://github.com/Wamoya/AISS-integration/commit/c2ec393d75074da54884950ba0837904ed158f8a), we are not sure of the meaning of the OneToOne relation between Video and User specified in the project instructions.
 
 ## TODO list
 
