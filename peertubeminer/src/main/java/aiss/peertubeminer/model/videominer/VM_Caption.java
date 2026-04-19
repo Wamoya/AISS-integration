@@ -1,16 +1,10 @@
 package aiss.peertubeminer.model.videominer;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 
+public class VM_Caption {
 
-@Entity
-@Table(name = "Caption")
-public class Caption {
-
-    @Id
     @JsonProperty("id")
     private String id;
 
@@ -20,6 +14,15 @@ public class Caption {
     @JsonProperty("language")
     private String language;
 
+    @JsonProperty("createdAt")
+    private String createdAt;
+
+    public VM_Caption(String id, String name, String language, String createdAt) {
+        this.id = id;
+        this.name = name;
+        this.language = language;
+        this.createdAt = createdAt;
+    }
 
     public String getId() {
         return id;
@@ -41,9 +44,13 @@ public class Caption {
         return language;
     }
 
-    public void setLanguage(String language) {
-        this.language = language;
+    public void setLanguage(String language) { this.language = language; }
+
+    public String getCreatedAt() {
+        return createdAt;
     }
+
+    public void setCreatedAt(String createdAt) { this.createdAt = createdAt; }
 
     @Override
     public String toString() {
@@ -51,6 +58,7 @@ public class Caption {
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", language='" + language + '\'' +
+                ", createdAt='" + createdAt + '\'' +
                 '}';
     }
 }

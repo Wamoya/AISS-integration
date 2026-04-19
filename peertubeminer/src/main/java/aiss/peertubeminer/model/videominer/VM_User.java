@@ -3,17 +3,11 @@ package aiss.peertubeminer.model.videominer;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
-/**
- * @author Juan C. Alonso
- */
-@Entity
-@Table(name = "VMUser")
-public class User {
 
-    @Id
+public class VM_User {
+
     @JsonProperty("id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private String id;
 
     @JsonProperty("name")
     private String name;
@@ -24,11 +18,18 @@ public class User {
     @JsonProperty("picture_link")
     private String picture_link;
 
-    public Long getId() {
+    public VM_User(String id, String name, String user_link, String picture_link) {
+        this.id = id;
+        this.name = name;
+        this.user_link = picture_link;
+        this.picture_link = picture_link;
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

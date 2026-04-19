@@ -17,7 +17,6 @@ public class CommentRepository {
                         "Hello!",
                         "After watching the video."
                 )
-
         );
         comments.add(
                 new Comment(
@@ -25,7 +24,6 @@ public class CommentRepository {
                         "Anyone in 2026?",
                         "2026, probably"
                 )
-
         );
         comments.add(
                 new Comment(

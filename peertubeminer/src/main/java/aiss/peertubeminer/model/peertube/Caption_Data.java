@@ -13,12 +13,12 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "data"
 })
 @Generated("jsonschema2pojo")
-public class CommentSearch {
+public class Caption_Data {
 
     @JsonProperty("total")
     private Integer total;
     @JsonProperty("data")
-    private List<Comment> data;
+    private List<Caption> data;
 
     @JsonProperty("total")
     public Integer getTotal() {
@@ -31,19 +31,19 @@ public class CommentSearch {
     }
 
     @JsonProperty("data")
-    public List<Comment> getData() {
+    public List<Caption> getData() {
         return data;
     }
 
     @JsonProperty("data")
-    public void setData(List<Comment> data) {
+    public void setData(List<Caption> data) {
         this.data = data;
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(CommentSearch.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+        sb.append(Caption_Data.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
         sb.append("total");
         sb.append('=');
         sb.append(((this.total == null)?"<null>":this.total));

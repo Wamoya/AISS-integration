@@ -1,7 +1,7 @@
 package aiss.peertubeminer.service;
 
-import aiss.peertubeminer.model.peertube.Video;
-import aiss.peertubeminer.model.peertube.VideoSearch;
+import aiss.peertubeminer.model.peertube.*;
+import aiss.peertubeminer.model.videominer.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -9,39 +9,117 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class VideoService {
+
     @Autowired
     RestTemplate restTemplate;
 
-    // String BASE_URI = "https://peertube2.cpy.sm/api/v1"; // Developer instance
-    String BASE_URI = "https://peertube.tv/api/v1";   // Different instance (Community-maintained)
+    String BASE_URI = "https://peertube.tv/api/v1";
 
-    public List<Video> getAllVideosFromChannel(String channelHandle) {
-        // Default values (specified on project instructions)
-        return getAllVideosFromChannel(channelHandle, 10, 2);
-    }
+    // GET https://peertube.tv/api/v1/:id?maxVideos={Integer}&maxComments={Integer}
     public List<Video> getAllVideosFromChannel(String channelHandle, Integer maxVideos, Integer maxComments) {
-        // baseUri/:id?maxVideos={Integer}&maxComments={Integer}
-
-        // ### count query parameter ###
-        // - integer [1..100]
-        // - specifies the (max) number of videos to return
-        maxVideos = Math.max(maxVideos, 1);
-        maxVideos = Math.min(maxVideos, 100);
-
+//        maxVideos = Math.max(maxVideos, 1);
+//        maxVideos = Math.min(maxVideos, 100);
         String uri = BASE_URI + "/video-channels/" + channelHandle + "/videos?count=" + maxVideos;
+        ResponseEntity<Video_Data> response = restTemplate.getForEntity(uri, Video_Data.class);
 
-//        Video[] videos = restTemplate
-//                .getForObject(uri, Video[].class);
         List<Video> videos = new ArrayList<>();
 
-        ResponseEntity<VideoSearch> response = restTemplate.getForEntity(uri, VideoSearch.class);
-
-        videos.addAll(response.getBody().getData());
-
+        if (response.getBody() != null) {
+            videos = response.getBody().getData();
+        }
 
         return videos;
+    }
+
+    // POST https://peertube.tv/api/v1/:id?maxVideos={Integer}&maxComments={Integer}
+    public List<VM_Video> postAllVideosFromChannel(String channelHandle, Integer maxVideos, Integer maxComments) {
+        String uri = "http://localhost:8080/api/videominer/videos";
+
+        List<Video> pt_videos = getAllVideosFromChannel(channelHandle, maxVideos, maxComments);
+        List<VM_Video> vm_videos = new ArrayList<>();
+
+        // For each video, we have to make additional requests to get their comments and captions.
+        // Once we have all data required to build a VM_Video object, we do so and append it to the accumulator.
+        for (Video v : pt_videos) {
+            Integer videoId = v.getId();
+
+            // We get the List<Comment> for the video we are currently iterating
+            String uri_comments = BASE_URI + "/videos/" + videoId + "/comment-threads";
+            ResponseEntity<Comment_Data> r_comments = restTemplate.getForEntity(uri_comments, Comment_Data.class);
+            List<Comment> comments = new ArrayList<>();
+            if (r_comments.getBody() != null) {
+                comments = r_comments.getBody().getData();
+            }
+
+            // We also get the List<Caption>
+            String uri_captions = BASE_URI + "/videos/" + videoId + "/captions";
+            ResponseEntity<Caption_Data> r_captions = restTemplate.getForEntity(uri_captions, Caption_Data.class);
+            List<Caption> captions = new ArrayList<>();
+            if (r_captions.getBody() != null) {
+                captions = r_captions.getBody().getData();
+            }
+
+            // We create a VM_Channel object
+            VM_Channel vm_channel = new VM_Channel(
+                    UUID.randomUUID().toString(),
+                    v.getChannel().getName(),
+                    v.getChannel().getDescription(),
+                    v.getChannel().getCreatedAt(),
+                    new ArrayList<>() // TODO. Revise logic because VM_Channel needs videos and VM_Video needs channel
+            );
+
+            // We create a VM_User object
+            VM_User vm_user = new VM_User(
+                    UUID.randomUUID().toString(),
+                    v.getAccount().getName(),
+                    v.getAccount().getUrl(),
+                    v.getAccount().getAvatars().getFirst().getFileUrl()
+            );
+
+            // We create a List<VM_Comment> object
+            List<VM_Comment> vm_comments = new ArrayList<>();
+            for (Comment c : comments) {
+                vm_comments.add(new VM_Comment(
+                                UUID.randomUUID().toString(),
+                                c.getText(),
+                                c.getCreatedAt()
+                        )
+                );
+            }
+
+            // We create a List<VM_Caption> object
+            List<VM_Caption> vm_captions = new ArrayList<>();
+            for (Caption c : captions) {
+                vm_captions.add(new VM_Caption(
+                        UUID.randomUUID().toString(),
+                        c.getFileUrl(),
+                        c.getLanguage().getLabel(),
+                        c.getUpdatedAt()
+                        )
+                );
+            }
+
+            // We add a new VM_Video to the accumulator
+            vm_videos.add(
+                    new VM_Video(
+                            UUID.randomUUID().toString(),
+                            v.getName(),
+                            v.getDescription(),
+                            v.getPublishedAt(),
+                            vm_channel,
+                            vm_user,
+                            vm_comments,
+                            vm_captions
+                    )
+            );
+        }
+
+        // Now that we have
+        ResponseEntity<List<VM_Video>> response = restTemplate.postForEntity(uri, vm_videos, List<VM_Video>);
+        return response.getBody();
     }
 }

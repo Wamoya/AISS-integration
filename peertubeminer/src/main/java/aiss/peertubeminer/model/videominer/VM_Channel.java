@@ -8,34 +8,32 @@ import jakarta.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+public class VM_Channel {
 
-@Entity
-@Table(name = "Channel")
-public class Channel {
-
-    @Id
     @JsonProperty("id")
     private String id;
 
     @JsonProperty("name")
-    @NotEmpty(message = "Channel name cannot be empty")
     private String name;
 
     @JsonProperty("description")
-    @Column(columnDefinition="TEXT")
     private String description;
 
     @JsonProperty("createdTime")
-    @NotEmpty(message = "Channel creation time cannot be empty")
     private String createdTime;
 
     @JsonProperty("videos")
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "channelId")
-    @NotNull(message = "Channel videos cannot be null")
-    private List<Video> videos;
+    private List<VM_Video> videos;
 
-    public Channel() {
+    public VM_Channel(String id, String name, String description, String createdTime, List<VM_Video> videos) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.createdTime = createdTime;
+        this.videos = videos;
+    }
+
+    public VM_Channel() {
         this.videos = new ArrayList<>();
     }
 
@@ -71,11 +69,11 @@ public class Channel {
         this.createdTime = createdTime;
     }
 
-    public List<Video> getVideos() {
+    public List<VM_Video> getVideos() {
         return videos;
     }
 
-    public void setVideos(List<Video> videos) {
+    public void setVideos(List<VM_Video> videos) {
         this.videos = videos;
     }
 

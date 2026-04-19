@@ -1,7 +1,5 @@
 package aiss.peertubeminer.repository;
 
-import aiss.peertubeminer.model.peertube.Caption;
-import aiss.peertubeminer.model.peertube.Comment;
 import aiss.peertubeminer.model.peertube.Video;
 import org.springframework.stereotype.Repository;
 
@@ -22,12 +20,12 @@ public class VideoRepository {
                         "title",
                         "description",
                         "yesterday",
-                        channelRepository.findOneById(1),
-                        new ArrayList<Comment>(
-                                List.of(commentRepository.findOneById(1),
-                                        commentRepository.findOneById(2))
-                                ),
-                        new ArrayList<Caption>()
+                        channelRepository.findOneById(1)
+//                        new ArrayList<Comment>(
+//                                List.of(commentRepository.findOneById(1),
+//                                        commentRepository.findOneById(2))
+//                                ),
+//                        new ArrayList<Caption>()
                 )
 
         );
@@ -37,9 +35,9 @@ public class VideoRepository {
                         "Different video",
                         "Different video's description",
                         "tomorrow",
-                        channelRepository.findOneById(1),
-                        new ArrayList<Comment>(),
-                        new ArrayList<Caption>()
+                        channelRepository.findOneById(1)
+//                        new ArrayList<Comment>(),
+//                        new ArrayList<Caption>()
                         )
         );
         this.videos.add(
@@ -48,9 +46,9 @@ public class VideoRepository {
                         "Java 101,",
                         "Haskell is better.",
                         "sad",
-                        channelRepository.findOneById(3),
-                        new ArrayList<Comment>(List.of(commentRepository.findOneById(3))),
-                        new ArrayList<Caption>()
+                        channelRepository.findOneById(3)
+//                        new ArrayList<Comment>(List.of(commentRepository.findOneById(3))),
+//                        new ArrayList<Caption>()
                 )
         );
     }

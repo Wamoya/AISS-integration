@@ -1,53 +1,42 @@
 package aiss.peertubeminer.model.videominer;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 
 import java.util.List;
 
-@Entity
-@Table(name = "Video")
-public class Video {
+public class VM_Video {
 
-    @Id
     @JsonProperty("id")
     private String id;
-
     @JsonProperty("name")
-    @NotEmpty(message = "Video name cannot be empty")
     private String name;
-
     @JsonProperty("description")
-    @Column(columnDefinition="TEXT")
     private String description;
-
     @JsonProperty("releaseTime")
-    @NotEmpty(message = "Video release time cannot be empty")
     private String releaseTime;
-
-    @JsonProperty("author")
-    @OneToOne(cascade = CascadeType.ALL)
-    @NotNull(message = "Video author cannot be null")
-    private Channel author;
-
+    @JsonProperty("channel")
+    private VM_Channel channel;
+    @JsonProperty("user")
+    private VM_User user;
     @JsonProperty("comments")
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "videoId")
-    @NotNull(message = "Video comments cannot be null")
-    private List<Comment> comments;
-
+    private List<VM_Comment> comments;
     @JsonProperty("captions")
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "videoId")
-    @NotNull(message = "Video captions cannot be null")
-    private List<Caption> captions;
+    private List<VM_Caption> captions;
+
+    public VM_Video(String id, String name, String description, String releaseTime, VM_Channel channel, VM_User user, List<VM_Comment> comments, List<VM_Caption> captions) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.releaseTime = releaseTime;
+        this.channel = channel;
+        this.user = user;
+        this.comments = comments;
+        this.captions = captions;
+    }
 
     public String getId() {
         return id;
     }
-
     public void setId(String id) {
         this.id = id;
     }
@@ -55,7 +44,6 @@ public class Video {
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -63,7 +51,6 @@ public class Video {
     public String getDescription() {
         return description;
     }
-
     public void setDescription(String description) {
         this.description = description;
     }
@@ -71,24 +58,27 @@ public class Video {
     public String getReleaseTime() {
         return releaseTime;
     }
-
     public void setReleaseTime(String releaseTime) {
         this.releaseTime = releaseTime;
     }
 
-    public List<Comment> getComments() {
+    public VM_Channel getChannel() { return channel; }
+    public void setChannel(VM_Channel channel) { this.channel = channel; }
+
+    public VM_User getUser() { return user; }
+    public void SetUser(VM_User user) { this.user = user; }
+
+    public List<VM_Comment> getComments() {
         return comments;
     }
-
-    public void setComments(List<Comment> comments) {
+    public void setComments(List<VM_Comment> comments) {
         this.comments = comments;
     }
 
-    public List<Caption> getCaptions() {
+    public List<VM_Caption> getCaptions() {
         return captions;
     }
-
-    public void setCaptions(List<Caption> captions) {
+    public void setCaptions(List<VM_Caption> captions) {
         this.captions = captions;
     }
 

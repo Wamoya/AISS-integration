@@ -3,23 +3,23 @@ package aiss.peertubeminer.model.videominer;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
-/**
- * @author Juan C. Alonso
- */
-@Entity
-@Table(name = "Comment")
-public class Comment {
+public class VM_Comment {
 
     @Id
     @JsonProperty("id")
     private String id;
 
     @JsonProperty("text")
-    @Column(columnDefinition="TEXT")
     private String text;
 
     @JsonProperty("createdOn")
     private String createdOn;
+
+    public VM_Comment(String id, String text, String createdOn) {
+        this.id = id;
+        this.text = text;
+        this.createdOn = createdOn;
+    }
     
     public String getId() {
         return id;
