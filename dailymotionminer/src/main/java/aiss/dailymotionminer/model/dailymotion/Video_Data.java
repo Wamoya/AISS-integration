@@ -5,7 +5,6 @@ import javax.annotation.processing.Generated;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-
 import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -13,12 +12,11 @@ import java.util.List;
     "page",
     "limit",
     "explicit",
-    "total",
     "has_more",
     "list"
 })
 @Generated("jsonschema2pojo")
-public class CaptionSearch {
+public class Video_Data {
 
     @JsonProperty("page")
     private Integer page;
@@ -26,12 +24,10 @@ public class CaptionSearch {
     private Integer limit;
     @JsonProperty("explicit")
     private Boolean explicit;
-    @JsonProperty("total")
-    private Integer total;
     @JsonProperty("has_more")
     private Boolean hasMore;
     @JsonProperty("list")
-    private List<Caption> list;
+    private java.util.List<Video> list;
 
     @JsonProperty("page")
     public Integer getPage() {
@@ -63,16 +59,6 @@ public class CaptionSearch {
         this.explicit = explicit;
     }
 
-    @JsonProperty("total")
-    public Integer getTotal() {
-        return total;
-    }
-
-    @JsonProperty("total")
-    public void setTotal(Integer total) {
-        this.total = total;
-    }
-
     @JsonProperty("has_more")
     public Boolean getHasMore() {
         return hasMore;
@@ -84,19 +70,19 @@ public class CaptionSearch {
     }
 
     @JsonProperty("list")
-    public List<Caption> getList() {
+    public List<Video> getList() {
         return list;
     }
 
     @JsonProperty("list")
-    public void setList(List<Caption> list) {
+    public void setList(List<Video> list) {
         this.list = list;
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(CaptionSearch.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+        sb.append(Video_Data.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
         sb.append("page");
         sb.append('=');
         sb.append(((this.page == null)?"<null>":this.page));
@@ -108,10 +94,6 @@ public class CaptionSearch {
         sb.append("explicit");
         sb.append('=');
         sb.append(((this.explicit == null)?"<null>":this.explicit));
-        sb.append(',');
-        sb.append("total");
-        sb.append('=');
-        sb.append(((this.total == null)?"<null>":this.total));
         sb.append(',');
         sb.append("hasMore");
         sb.append('=');
