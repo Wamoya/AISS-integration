@@ -53,8 +53,8 @@ public class PeertubeController {
                 vm_captions.add(
                         new VM_Caption(
                                 UUID.randomUUID().toString(),
-                                c.getFileUrl(),
-                                c.getLanguage().getLabel()
+                                c.getLanguage().getLabel(),
+                                c.getFileUrl()
                         )
                 );
             }

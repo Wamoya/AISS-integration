@@ -1,18 +1,15 @@
 package aiss.peertubeminer.model.videominer;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.Id;
-
 public class VM_Caption {
 
     private String id;
     private String language;
-    private String createdAt;
+    private String link;
 
-    public VM_Caption(String id, String language, String createdAt) {
+    public VM_Caption(String id, String language, String link) {
         this.id = id;
         this.language = language;
-        this.createdAt = createdAt;
+        this.link = link;
     }
 
     public String getId() {
@@ -29,18 +26,18 @@ public class VM_Caption {
 
     public void setLanguage(String language) { this.language = language; }
 
-    public String getCreatedAt() {
-        return createdAt;
+    public String getLink() {
+        return link;
     }
 
-    public void setCreatedAt(String createdAt) { this.createdAt = createdAt; }
+    public void setLink(String link) { this.link = link; }
 
     @Override
     public String toString() {
         return "Caption{" +
                 "id='" + id + '\'' +
                 ", language='" + language + '\'' +
-                ", createdAt='" + createdAt + '\'' +
+                ", createdAt='" + link + '\'' +
                 '}';
     }
 }
