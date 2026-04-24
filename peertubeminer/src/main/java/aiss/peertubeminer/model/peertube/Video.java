@@ -24,19 +24,9 @@ public class Video {
     private Channel channel;
     @JsonProperty("account")
     private User account;
-//    List<Comment> comments = new ArrayList<>();
-//    List<Caption> captions = new ArrayList<>();
+    private List<Comment> comments = new ArrayList<>();
+    private List<Caption> captions = new ArrayList<>();
 
-    public Video(Integer id, String name, String description, String publishedAt, Channel channel, User account) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.publishedAt = publishedAt;
-        this.channel = channel;
-        this.account = account;
-//        this.comments = comments;
-//        this.captions = captions;
-    }
 
     @JsonProperty("id")
     public Integer getId() {
@@ -96,11 +86,11 @@ public class Video {
         this.account = account;
     }
 
-//    public List<Comment> getComments() { return comments; }
-//    public void setComments(List<Comment> comments) { this.comments = comments; }
-//
-//    public List<Caption> getCaptions() { return captions; }
-//    public void setCaptions(List<Caption> captions) { this.captions = captions; }
+    public List<Comment> getComments() { return comments; }
+    public void setComments(List<Comment> comments) { this.comments = comments; }
+
+    public List<Caption> getCaptions() { return captions; }
+    public void setCaptions(List<Caption> captions) { this.captions = captions; }
 
     @Override
     public String toString() {
@@ -130,14 +120,14 @@ public class Video {
         sb.append('=');
         sb.append(((this.account == null)?"<null>":this.account));
         sb.append(',');
-//        sb.append("comments");
-//        sb.append('=');
-//        sb.append(((this.comments == null)?"<null>":this.comments));
-//        sb.append(',');
-//        sb.append("captions");
-//        sb.append('=');
-//        sb.append(((this.captions == null)?"<null>":this.captions));
-//        sb.append(',');
+        sb.append("comments");
+        sb.append('=');
+        sb.append(((this.comments == null)?"<null>":this.comments));
+        sb.append(',');
+        sb.append("captions");
+        sb.append('=');
+        sb.append(((this.captions == null)?"<null>":this.captions));
+        sb.append(',');
         if (sb.charAt((sb.length()- 1)) == ',') {
             sb.setCharAt((sb.length()- 1), ']');
         } else {

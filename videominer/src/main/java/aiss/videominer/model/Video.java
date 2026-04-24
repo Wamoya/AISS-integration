@@ -31,15 +31,10 @@ public class Video {
     @NotEmpty(message = "Video release time cannot be empty")
     private String releaseTime;
 
-    // On DB, each video has a User. (MVP required by project instructions)
-    // - In the future, we could expand the data model from this point
-    // - One user <-> Many videos
-    // - One user <-> Many comments
-    // - One user <-> Many channels (Maybe?)
-    @JsonProperty("author")
+    @JsonProperty("user")
     @OneToOne(cascade = CascadeType.ALL)
     @NotNull(message = "Video author cannot be null")
-    private Channel author;
+    private User user;
 
     @JsonProperty("comments")
     @OneToMany(cascade = CascadeType.ALL)

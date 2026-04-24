@@ -5,14 +5,8 @@ import jakarta.persistence.*;
 
 public class VM_Comment {
 
-    @Id
-    @JsonProperty("id")
     private String id;
-
-    @JsonProperty("text")
     private String text;
-
-    @JsonProperty("createdOn")
     private String createdOn;
 
     public VM_Comment(String id, String text, String createdOn) {
@@ -20,7 +14,7 @@ public class VM_Comment {
         this.text = text;
         this.createdOn = createdOn;
     }
-    
+
     public String getId() {
         return id;
     }

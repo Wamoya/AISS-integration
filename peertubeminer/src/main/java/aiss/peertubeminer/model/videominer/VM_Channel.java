@@ -10,27 +10,28 @@ import java.util.List;
 
 public class VM_Channel {
 
-    @JsonProperty("id")
     private String id;
-
-    @JsonProperty("name")
     private String name;
-
-    @JsonProperty("description")
     private String description;
-
-    @JsonProperty("createdTime")
     private String createdTime;
-
-    @JsonProperty("videos")
     private List<VM_Video> videos;
 
+    // Constructor 1. All parameters
     public VM_Channel(String id, String name, String description, String createdTime, List<VM_Video> videos) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.createdTime = createdTime;
         this.videos = videos;
+    }
+
+    // Constructor 2. Videos start empty
+    public VM_Channel(String id, String name, String description, String createdTime) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.createdTime = createdTime;
+        this.videos = new ArrayList<>();
     }
 
     public VM_Channel() {

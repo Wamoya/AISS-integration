@@ -6,16 +6,9 @@ import jakarta.persistence.*;
 
 public class VM_User {
 
-    @JsonProperty("id")
     private String id;
-
-    @JsonProperty("name")
     private String name;
-
-    @JsonProperty("user_link")
     private String user_link;
-
-    @JsonProperty("picture_link")
     private String picture_link;
 
     public VM_User(String id, String name, String user_link, String picture_link) {

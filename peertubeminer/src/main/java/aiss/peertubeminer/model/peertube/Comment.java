@@ -15,14 +15,6 @@ public class Comment {
     private String text;
     @JsonProperty("createdAt") // -> createdOn
     private String createdAt;
-//    @JsonProperty("videoId") // Used for relating videos to comments
-//    private Integer videoId;
-
-    public Comment(Integer id, String text, String createdAt) {
-        this.id = id;
-        this.text = text;
-        this.createdAt = createdAt;
-    }
 
     @JsonProperty("id")
     public Integer getId() {

@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.List;
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Channel {
@@ -18,12 +20,7 @@ public class Channel {
     @JsonProperty("createdAt") // -> createdTime
     private String createdAt;
 
-    public Channel(Integer id, String name, String description, String createdAt) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.createdAt = createdAt;
-    }
+    private List<Video> videos;
 
     @JsonProperty("id")
     public Integer getId() {

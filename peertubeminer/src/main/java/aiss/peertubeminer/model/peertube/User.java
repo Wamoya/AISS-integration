@@ -20,13 +20,6 @@ public class User {
     @JsonProperty("avatars") // -> picture_link = link of one of the avatars
     private List<Picture> avatars;
 
-    public User(Integer id, String name, String url, List<Picture> avatars) {
-        this.id = id;
-        this.name = name;
-        this.url = url;
-        this.avatars = avatars;
-    }
-
     @JsonProperty("id")
     public Integer getId() {
         return id;
