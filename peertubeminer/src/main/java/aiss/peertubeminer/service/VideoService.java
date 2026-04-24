@@ -30,7 +30,7 @@ public class VideoService {
 //        maxVideos = Math.min(maxVideos, 100);
 
         String uri = BASE_URI + "/video-channels/" + channelHandle + "/videos?count=" + maxVideos;
-        ResponseEntity<Video_Data> response = restTemplate.getForEntity(uri, Video_Data.class); // TODO. Identify why is this line returning an exception
+        ResponseEntity<Video_Data> response = restTemplate.getForEntity(uri, Video_Data.class);
 
         List<Video> videos = new ArrayList<>();
 

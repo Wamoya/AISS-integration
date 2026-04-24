@@ -4,6 +4,7 @@ package aiss.peertubeminer.model.peertube;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -24,7 +25,10 @@ public class Video {
     private Channel channel;
     @JsonProperty("account")
     private User account;
+
+    @JsonIgnore
     private List<Comment> comments = new ArrayList<>();
+    @JsonIgnore
     private List<Caption> captions = new ArrayList<>();
 
 

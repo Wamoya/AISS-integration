@@ -23,7 +23,7 @@ public class CommentService {
     String BASE_URI = "https://peertube.tv/api/v1";
 
     public List<Comment> getCommentsFromVideo(String videoId, Integer maxComments) {
-        String uri = BASE_URI + "/" + videoId + "/comment-threads";
+        String uri = BASE_URI + "/videos/" + videoId + "/comment-threads";
         ResponseEntity<Comment_Data> response = restTemplate.getForEntity(uri, Comment_Data.class);
 
         List<Comment> comments = new ArrayList<>();
