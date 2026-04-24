@@ -49,7 +49,7 @@ public class Channel {
 
     @JsonProperty("description")
     public void setDescription(String description) {
-        this.name = description;
+        this.description = description;
     }
 
     @JsonProperty("createdAt")
