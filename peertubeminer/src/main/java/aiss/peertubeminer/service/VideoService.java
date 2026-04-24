@@ -17,16 +17,20 @@ public class VideoService {
 
     @Autowired
     RestTemplate restTemplate;
+    @Autowired
+    CommentService commentService;
+    @Autowired
+    CaptionService captionService;
 
     String BASE_URI = "https://peertube.tv/api/v1";
 
     // GET https://peertube.tv/api/v1/:id?maxVideos={Integer}&maxComments={Integer}
     public List<Video> getAllVideosFromChannel(String channelHandle, Integer maxVideos) {
-        maxVideos = Math.max(maxVideos, 1); // TODO. The controller will be the one checking the conditions in the future
-        maxVideos = Math.min(maxVideos, 100);
+//        maxVideos = Math.max(maxVideos, 1); // TODO. The controller will be the one checking the conditions in the future
+//        maxVideos = Math.min(maxVideos, 100);
 
         String uri = BASE_URI + "/video-channels/" + channelHandle + "/videos?count=" + maxVideos;
-        ResponseEntity<Video_Data> response = restTemplate.getForEntity(uri, Video_Data.class);
+        ResponseEntity<Video_Data> response = restTemplate.getForEntity(uri, Video_Data.class); // TODO. Identify why is this line returning an exception
 
         List<Video> videos = new ArrayList<>();
 
@@ -41,14 +45,10 @@ public class VideoService {
         String videoId = video.getId().toString();
         String uri = BASE_URI + "/videos/" + videoId + "/comments";
 
-        List<Comment> comments = Arrays.asList(
-                restTemplate.getForEntity(uri, Comment[].class).getBody()
-        );
+        List<Comment> comments = commentService.getCommentsFromVideo(videoId, maxComments);
         video.setComments(comments);
 
-        List<Caption> captions = Arrays.asList(
-                restTemplate.getForEntity(uri, Caption[].class).getBody()
-        );
+        List<Caption> captions = captionService.getCaptionsFromVideo(videoId);
         video.setCaptions(captions);
 
         return video;

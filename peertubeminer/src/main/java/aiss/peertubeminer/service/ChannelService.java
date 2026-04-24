@@ -14,6 +14,8 @@ public class ChannelService {
 
     @Autowired
     RestTemplate restTemplate;
+    @Autowired
+    VideoService videoService;
 
     String BASE_URI = "https://peertube.tv/api/v1";
 
@@ -21,11 +23,17 @@ public class ChannelService {
         String uri = BASE_URI + "/video-channels/" + name;
         return restTemplate.getForObject(uri, Channel.class);
     }
-//    public Channel getChannelFull(String name, Integer maxVideos, Integer maxComments) {
-//        Channel channel = getChannel(name);
-//        List<Video> videos = new ArrayList<>();
-//
-//
-//
-//    }
+    public Channel getChannelFull(String name, Integer maxVideos, Integer maxComments) {
+        Channel channel = getChannel(name);
+        List<Video> videos = new ArrayList<>();
+
+        for (Video v : videoService.getAllVideosFromChannel(name, maxVideos)) {
+            videos.add(
+                    videoService.getVideoFull(v, maxComments)
+            );
+        }
+        channel.setVideos(videos);
+
+        return channel;
+    }
 }

@@ -62,6 +62,9 @@ public class Channel {
         this.createdAt = createdAt;
     }
 
+    public List<Video> getVideos() { return videos; }
+    public void setVideos(List<Video> videos) { this.videos = videos; }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

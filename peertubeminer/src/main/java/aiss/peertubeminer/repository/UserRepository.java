@@ -13,22 +13,22 @@ public class UserRepository {
     List<User> users = new ArrayList<>();
 
     public UserRepository() {
-        users.add(
-                new User(
-                        1,
-                        "Hello!",
-                        "https://peertube.tv/accounts/user1",
-                        new ArrayList<Picture>(List.of())
-                )
-
-        );
 //        users.add(
-//
+//                new User(
+//                        1,
+//                        "Hello!",
+//                        "https://peertube.tv/accounts/user1",
+//                        new ArrayList<Picture>(List.of())
 //                )
-//        );
-//        users.add(
 //
 //        );
+////        users.add(
+////
+////                )
+////        );
+////        users.add(
+////
+////        );
     }
 
     public List<User> findAll() { return this.users; }

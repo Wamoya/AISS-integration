@@ -31,9 +31,7 @@ public class Video_Data {
     }
 
     @JsonProperty("data")
-    public List<Video> getData() {
-        return data;
-    }
+    public List<Video> getData() { return data; }
 
     @JsonProperty("data")
     public void setData(List<Video> data) {
