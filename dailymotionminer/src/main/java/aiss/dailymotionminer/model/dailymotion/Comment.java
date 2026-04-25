@@ -3,9 +3,6 @@ package aiss.dailymotionminer.model.dailymotion;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.List;
-import java.util.UUID;
-import java.util.stream.Collectors;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Comment {
@@ -54,16 +51,12 @@ public class Comment {
         this.createdOn = createdOn;
     }
 
-    // Utility method for converting a list of Dailymotion tags into a list of Comment objects
-
-    public static List<Comment> getCommentsFromTags(List<String> tags, String videoReleaseTime) {
-        return tags.stream()
-                .map(tag -> new Comment(
-                        UUID.randomUUID().toString(),
-                        tag,
-                        videoReleaseTime))
-                .collect(Collectors.toList());
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "id='" + id + '\'' +
+                ", text='" + text + '\'' +
+                ", createdOn='" + createdOn + '\'' +
+                '}';
     }
-
-
 }
