@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -29,6 +30,9 @@ public class Video {
     private Integer createdTime;
     @JsonProperty("tags")
     private List<String> tags;
+
+    private List<Comment> comments = new ArrayList<>();
+    private List<Caption> captions = new ArrayList<>();
 
     @JsonProperty("id")
     public String getId() {
@@ -79,6 +83,12 @@ public class Video {
     public void setTags(List<String> tags) {
         this.tags = tags;
     }
+
+    public List<Comment> getComments() { return comments; }
+    public void setComments(List<Comment> comments) { this.comments = comments; }
+
+    public List<Caption> getCaptions() { return captions; }
+    public void setCaptions(List<Caption> captions) { this.captions = captions; }
 
     @Override
     public String toString() {

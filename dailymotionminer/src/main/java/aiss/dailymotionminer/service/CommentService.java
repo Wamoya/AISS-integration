@@ -18,21 +18,19 @@ public class CommentService {
     @Autowired
     RestTemplate restTemplate;
 
-    @Autowired
-    VideoService videoService;
-
     String BASE_URI = "https://api.dailymotion.com";
 
-    public List<Comment> getCommentsFromVideo(String videoId) {
+    public List<Comment> getCommentsFromVideo(String videoId, Integer maxComments) {
         String uri = BASE_URI + "/video/" + videoId
                 + "?fields=id,title,description,created_time,tags";
 
-        Video video = videoService.getVideoInformation(videoId); //Obtaining video data
+        Video video = restTemplate.getForObject(uri, Video.class); //Obtaining video data
 
-        List<String> tags = video.getTags();
-        if(tags == null) {
+        List<String> allTags = video.getTags();
+        if(allTags == null) {
             return Collections.emptyList();
         }
+        List<String> tags = new ArrayList<>(allTags.subList(0, Math.min(maxComments, allTags.size())));
 
         List<Comment> comments = tags.stream()
                 .map(tag -> new Comment(

@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+import java.util.List;
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
     "id",
@@ -24,6 +26,8 @@ public class Channel {
     private String description;
     @JsonProperty("created_time")
     private Integer createdTime;
+
+    private List<Video> videos;
 
     @JsonProperty("id")
     public String getId() {
@@ -64,6 +68,9 @@ public class Channel {
     public void setCreatedTime(Integer createdTime) {
         this.createdTime = createdTime;
     }
+
+    public List<Video> getVideos() { return videos; }
+    public void setVideos(List<Video> videos) { this.videos = videos; }
 
     @Override
     public String toString() {
