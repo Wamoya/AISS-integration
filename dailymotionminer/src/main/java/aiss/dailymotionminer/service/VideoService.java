@@ -25,15 +25,27 @@ public class VideoService {
     String BASE_URI = "https://api.dailymotion.com";
 
     public List<Video> getVideosFromChannel(String profileId, Integer maxVideos) {
-        String uri = BASE_URI + "/user/" + profileId
-                + "/videos?fields=id,title,description,created_time,tags&limit=" + maxVideos;
-        ResponseEntity<Video_Data> response = restTemplate.getForEntity(uri, Video_Data.class);
-
+        int remainingVideos = maxVideos;
+        int page = 1;
+        String uri;
+        ResponseEntity<Video_Data> response;
         List<Video> videos = new ArrayList<>();
 
-        if (response.getBody() != null) {
-            videos = response.getBody().getList();
-        }
+        do {
+            int limit = Math.min(remainingVideos, 100); //The maximum value allowed by the dailymotion API for "limit" is 100 videos per page.
+
+            uri = BASE_URI + "/user/" + profileId
+                    + "/videos?fields=id,title,description,created_time,tags&limit=" + limit + "&page=" + page;
+            response = restTemplate.getForEntity(uri, Video_Data.class);
+
+            if (response.getBody() != null) {
+                videos.addAll(response.getBody().getList());
+            }
+
+            remainingVideos -= limit; //Subtract obtained videos.
+            page++;
+
+        } while(response.getBody().getHasMore() && (videos.size() < maxVideos));
 
         return videos;
     }
