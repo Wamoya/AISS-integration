@@ -97,7 +97,7 @@ public class DailymotionController {
             vm_videos.add(
                     new VM_Video(
                             UUID.randomUUID().toString(),
-                            v.getTitle(), // En Dailymotion suele ser Title en vez de Name
+                            v.getTitle(),
                             v.getDescription(),
                             String.valueOf(v.getCreatedTime()),
                             vm_channel,
