@@ -26,6 +26,10 @@ public class Channel {
     private String description;
     @JsonProperty("created_time")
     private Integer createdTime;
+    @JsonProperty("url")
+    private String url;
+    @JsonProperty("avatar_240_url")
+    private String avatar240url;
 
     private List<Video> videos;
 
@@ -68,6 +72,10 @@ public class Channel {
     public void setCreatedTime(Integer createdTime) {
         this.createdTime = createdTime;
     }
+    @JsonProperty("url")
+    public String getUrl() { return url;}
+    @JsonProperty("avatar_240_url")
+    public String getAvatar240url() {return avatar240url;}
 
     public List<Video> getVideos() { return videos; }
     public void setVideos(List<Video> videos) { this.videos = videos; }
@@ -92,6 +100,16 @@ public class Channel {
         sb.append('=');
         sb.append(((this.createdTime == null)?"<null>":this.createdTime));
         sb.append(',');
+        sb.append("url");
+        sb.append('=');
+        sb.append(((this.url == null)?"<null>":this.url));
+        sb.append(',');
+
+        // --- AÑADIDO: avatar_240_url ---
+        sb.append("avatar_240_url");
+        sb.append('=');
+        sb.append(((this.avatar240url == null)?"<null>":this.avatar240url));
+        sb.append(',');
         if (sb.charAt((sb.length()- 1)) == ',') {
             sb.setCharAt((sb.length()- 1), ']');
         } else {
@@ -99,5 +117,6 @@ public class Channel {
         }
         return sb.toString();
     }
+
 
 }

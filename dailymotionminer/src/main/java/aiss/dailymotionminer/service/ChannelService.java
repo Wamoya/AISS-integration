@@ -20,7 +20,7 @@ public class ChannelService {
     String BASE_URI = "https://api.dailymotion.com";
 
     public Channel getChannel(String name) {
-        String uri = BASE_URI + "/user/" + name + "?fields=id,screenname,description,created_time";
+        String uri = BASE_URI + "/user/" + name + "?fields=id,screenname,description,created_time,url,avatar_240_url";
         return restTemplate.getForObject(uri, Channel.class);
     }
 
