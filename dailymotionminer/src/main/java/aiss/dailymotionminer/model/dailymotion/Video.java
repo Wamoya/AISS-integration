@@ -13,9 +13,11 @@ import java.util.List;
 @JsonPropertyOrder({
     "id",
     "title", // -> name
-    "description", // -> description
+    "description",
     "created_time", // -> releaseTime
-    "tags" // -> Comment class
+    "tags", // -> comments
+    "comments", // -> actual parsed comments
+    "captions"
 })
 @Generated("jsonschema2pojo")
 public class Video {

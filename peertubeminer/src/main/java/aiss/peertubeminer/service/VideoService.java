@@ -7,10 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class VideoService {
@@ -24,10 +21,8 @@ public class VideoService {
 
     String BASE_URI = "https://peertube.tv/api/v1";
 
-    // GET https://peertube.tv/api/v1/:id?maxVideos={Integer}&maxComments={Integer}
     public List<Video> getAllVideosFromChannel(String channelHandle, Integer maxVideos) {
-//        maxVideos = Math.max(maxVideos, 1); // TODO. The controller will be the one checking the conditions in the future
-//        maxVideos = Math.min(maxVideos, 100);
+        if (maxVideos == 0) return Collections.emptyList(); //To avoid unnecessary API requests.
 
         String uri = BASE_URI + "/video-channels/" + channelHandle + "/videos?count=" + maxVideos;
         ResponseEntity<Video_Data> response = restTemplate.getForEntity(uri, Video_Data.class);
@@ -43,8 +38,6 @@ public class VideoService {
 
     public Video getVideoFull(Video video, Integer maxComments) {
         String videoId = video.getId().toString();
-        String uri = BASE_URI + "/videos/" + videoId + "/comments";
-
         List<Comment> comments = commentService.getCommentsFromVideo(videoId, maxComments);
         video.setComments(comments);
 

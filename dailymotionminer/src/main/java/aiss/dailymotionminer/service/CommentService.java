@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
@@ -21,26 +20,29 @@ public class CommentService {
     String BASE_URI = "https://api.dailymotion.com";
 
     public List<Comment> getCommentsFromVideo(String videoId, Integer maxComments) {
+        if (maxComments == 0) return Collections.emptyList(); //To avoid unnecessary API requests.
+
         String uri = BASE_URI + "/video/" + videoId
                 + "?fields=id,title,description,created_time,tags";
+        Video video = restTemplate.getForObject(uri, Video.class);
 
-        Video video = restTemplate.getForObject(uri, Video.class); //Obtaining video data
+        assert video != null;
+        List<String> tags = video.getTags();
+        List<Comment> comments;
 
-        List<String> allTags = video.getTags();
-        if(allTags == null) {
-            return Collections.emptyList();
+        if(tags != null) {
+            comments = tags.stream()
+                    .limit(maxComments)
+                    .map(tag -> new Comment(
+                            UUID.randomUUID().toString(), //Random id assignment
+                            tag, //Video tag
+                            video.getCreatedTime().toString() //Video time stamp string
+                    ))
+                    .collect(Collectors.toList());
+        } else {
+            comments = Collections.emptyList();
         }
-        List<String> tags = new ArrayList<>(allTags.subList(0, Math.min(maxComments, allTags.size())));
-
-        List<Comment> comments = tags.stream()
-                .map(tag -> new Comment(
-                        UUID.randomUUID().toString(), //Random id assignment
-                        tag, //Video tag
-                        video.getCreatedTime().toString() //Video time stamp string
-                ))
-                .collect(Collectors.toList());
 
         return comments;
-
     }
 }
