@@ -6,6 +6,7 @@ import aiss.dailymotionminer.model.dailymotion.Video;
 import aiss.dailymotionminer.model.videominer.VM_Channel;
 import aiss.dailymotionminer.model.videominer.*;
 import aiss.dailymotionminer.service.ChannelService;
+import aiss.dailymotionminer.service.VideoMinerService;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,8 @@ public class DailymotionController {
 
     @Autowired
     ChannelService channelService;
+    @Autowired
+    VideoMinerService videoMinerService;
 
     @GetMapping("/{channelName}")
     public Channel getVideosFromChannel(@PathVariable String channelName,
@@ -47,6 +50,13 @@ public class DailymotionController {
                 channel.getDescription(),
                 String.valueOf(channel.getCreatedTime()),
                 vm_videos
+        );
+
+        VM_User vm_user = new VM_User(
+                UUID.randomUUID().toString(),
+                channel.getScreenname(),
+                channel.getUrl(),
+                channel.getAvatar240url()
         );
 
         for (Video v : channel.getVideos()) {
@@ -86,13 +96,6 @@ public class DailymotionController {
 
 
 
-            VM_User vm_user = new VM_User(
-                    UUID.randomUUID().toString(),
-                    channel.getScreenname(),
-                     channel.getUrl(),
-                    channel.getAvatar240url()
-            );
-
 
             vm_videos.add(
                     new VM_Video(
@@ -111,10 +114,10 @@ public class DailymotionController {
 
 
 
-        // TODO: Send the VM objects to VM Miner
+        VM_Channel savedChannel = videoMinerService.sendChannel(vm_channel);
 
 
-        return vm_channel;
+        return savedChannel;
     }
 
 }
