@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
     "path",
-    "fileUrl",
+    "fileUrl", // -> picture_link
     "width",
     "height",
     "createdAt",
@@ -20,7 +20,7 @@ public class Picture {
 
     @JsonProperty("path")
     private String path;
-    @JsonProperty("fileUrl")
+    @JsonProperty("fileUrl") // -> picture_link
     private String fileUrl;
     @JsonProperty("width")
     private Integer width;

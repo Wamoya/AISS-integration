@@ -4,20 +4,27 @@ package aiss.peertubeminer.model.peertube;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
+@JsonPropertyOrder({
+        "id",
+        "name",
+        "description",
+        "publishedAt", // -> releaseTime
+        "channel",
+        "user",
+        "comments",
+        "captions"
+})
 public class Video {
 
     @JsonProperty("id")
     private Integer id;
     @JsonProperty("name")
     private String name;
-    @JsonProperty("description") // -> description
+    @JsonProperty("description")
     private String description;
     @JsonProperty("publishedAt") // -> releaseTime
     private String publishedAt;
@@ -26,9 +33,8 @@ public class Video {
     @JsonProperty("account")
     private User account;
 
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY) //This attribute will be considered for the responses our API gives, but not when asking the PeerTube API for a video (as it provides a field named "comments" that is an Integer).
     private List<Comment> comments = new ArrayList<>();
-    @JsonIgnore
     private List<Caption> captions = new ArrayList<>();
 
 

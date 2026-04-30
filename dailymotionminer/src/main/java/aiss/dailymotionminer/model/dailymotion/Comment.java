@@ -2,22 +2,23 @@ package aiss.dailymotionminer.model.dailymotion;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 
 @JsonIgnoreProperties(ignoreUnknown = true)
+@JsonPropertyOrder({
+        "id",
+        "text",
+        "createdOn"
+})
 public class Comment {
 
     @JsonProperty("id")
     private String id;
-
     @JsonProperty("text")
     private String text;
-
     @JsonProperty("createdOn")
     private String createdOn;
-
-//    @JsonProperty("videoId") // Used for relating videos to comments
-//    private Integer videoId;
 
     public Comment(String id, String text, String createdOn) {
         this.id = id;

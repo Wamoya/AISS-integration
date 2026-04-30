@@ -23,6 +23,7 @@ public class ChannelService {
         String uri = BASE_URI + "/video-channels/" + name;
         return restTemplate.getForObject(uri, Channel.class);
     }
+
     public Channel getChannelFull(String name, Integer maxVideos, Integer maxComments) {
         Channel channel = getChannel(name);
         List<Video> videos = new ArrayList<>();

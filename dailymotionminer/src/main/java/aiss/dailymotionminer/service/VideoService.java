@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -25,6 +26,8 @@ public class VideoService {
     String BASE_URI = "https://api.dailymotion.com";
 
     public List<Video> getVideosFromChannel(String profileId, Integer maxVideos) {
+        if (maxVideos == 0) return Collections.emptyList(); //To avoid unnecessary API requests.
+
         int remainingVideos = maxVideos;
         int page = 1;
         String uri;
@@ -49,13 +52,6 @@ public class VideoService {
 
         return videos;
     }
-
-    //Unused
-//    public Video getVideoInformation(String videoId) {
-//        String uri = BASE_URI + "/video/" + videoId
-//                + "?fields=id,title,description,created_time,tags";
-//        return restTemplate.getForObject(uri, Video.class);
-//    }
 
     public Video getVideoFull(Video video, Integer maxComments) {
         String videoId = video.getId();

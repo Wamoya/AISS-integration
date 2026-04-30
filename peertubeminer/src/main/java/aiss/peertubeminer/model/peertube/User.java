@@ -6,9 +6,16 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
+@JsonPropertyOrder({
+        "id",
+        "name",
+        "url", // -> user_link
+        "avatars" // -> ~picture_link: list of avatars (each having the link inside)
+})
 public class User {
 
     @JsonProperty("id")
@@ -17,7 +24,7 @@ public class User {
     private String name;
     @JsonProperty("url") // -> user_link
     private String url;
-    @JsonProperty("avatars") // -> picture_link = link of one of the avatars
+    @JsonProperty("avatars") // -> ~picture_link: list of avatars (each having the link inside)
     private List<Picture> avatars;
 
     @JsonProperty("id")

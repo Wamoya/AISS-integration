@@ -12,8 +12,11 @@ import java.util.List;
 @JsonPropertyOrder({
     "id",
     "screenname", // -> name
-    "description", // -> description
-    "created_time" // -> createdTime
+    "description",
+    "created_time", // -> createdTime
+    "videos",
+    "url", // -> user_link for User
+    "avatar_240_url" // -> picture_link for User
 })
 @Generated("jsonschema2pojo")
 public class Channel {
