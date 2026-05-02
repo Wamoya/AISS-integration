@@ -21,15 +21,15 @@ public class PeertubeController {
 
     @GetMapping("/{channelName}")
     public Channel getVideosFromChannel(@PathVariable String channelName,
-                                        @RequestParam(name = "maxVideos", defaultValue = "10") @Min(0) @Max(100) Integer maxVideos, // TODO. PeerTube's value for "count" must be in [1..100], but we should expect to get bigger numbers. Instead of rejecting those requests, we should implement some sort of paging logic in VideoService to get the desired number of videos
+                                        @RequestParam(name = "maxVideos", defaultValue = "10") @Min(0) Integer maxVideos, // TODO. PeerTube's value for "count" must be in [1..100], but we should expect to get bigger numbers. Instead of rejecting those requests, we should implement some sort of paging logic in VideoService to get the desired number of videos
                                         @RequestParam(name = "maxComments", defaultValue = "2") @Min(0) Integer maxComments) {
         return channelService.getChannelFull(channelName, maxVideos, maxComments);
     }
 
     @PostMapping("/{channelName}")
     public VM_Channel postVideosFromChannel(@PathVariable String channelName,
-                                            @RequestParam(name = "maxVideos", defaultValue = "10") @Min(1) @Max(100) Integer maxVideos, // TODO. PeerTube's value for "count" must be in [1..100], but we should expect to get bigger numbers. Instead of rejecting those requests, we should implement some sort of paging logic in VideoService to get the desired number of videos
-                                            @RequestParam(name = "maxComments", defaultValue = "2") Integer maxComments) {
+                                            @RequestParam(name = "maxVideos", defaultValue = "10") @Min(0) Integer maxVideos, // TODO. PeerTube's value for "count" must be in [1..100], but we should expect to get bigger numbers. Instead of rejecting those requests, we should implement some sort of paging logic in VideoService to get the desired number of videos
+                                            @RequestParam(name = "maxComments", defaultValue = "2") @Min(0) Integer maxComments) {
         Channel channel = channelService.getChannelFull(channelName, maxVideos, maxComments);
 
         // TODO. Delegate the translation responsibility to a different file
