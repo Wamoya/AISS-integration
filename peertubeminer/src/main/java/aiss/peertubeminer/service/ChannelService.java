@@ -44,7 +44,7 @@ public class ChannelService {
     private void throttle(boolean do_throttle) {
         if (do_throttle) {
             try {
-                Thread.sleep(500);
+                Thread.sleep(300);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
                 throw new RuntimeException("The thread was interrupted during the pause.", e);

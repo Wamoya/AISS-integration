@@ -52,7 +52,7 @@ public class VideoService {
 
             if (possible && remaining > 0) { // Delay before iterating again to avoid "code 429" errors.
                 try {
-                    Thread.sleep(500);
+                    Thread.sleep(300);
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
                     throw new RuntimeException("The thread was interrupted during the pause.", e);
@@ -64,11 +64,10 @@ public class VideoService {
     }
 
     public Video getVideoFull(Video video, Integer maxComments) {
-        String videoId = video.getId().toString();
-        List<Comment> comments = commentService.getCommentsFromVideo(videoId, maxComments);
+        List<Comment> comments = commentService.getCommentsFromVideo(video, maxComments);
         video.setComments(comments);
 
-        List<Caption> captions = captionService.getCaptionsFromVideo(videoId);
+        List<Caption> captions = captionService.getCaptionsFromVideo(video);
         video.setCaptions(captions);
 
         return video;

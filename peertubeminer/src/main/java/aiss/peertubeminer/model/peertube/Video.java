@@ -8,20 +8,10 @@ import com.fasterxml.jackson.annotation.*;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-@JsonPropertyOrder({
-        "id",
-        "name",
-        "description",
-        "publishedAt", // -> releaseTime
-        "channel",
-        "user",
-        "comments",
-        "captions"
-})
 public class Video {
 
     @JsonProperty("id")
-    private Integer id;
+    private String id;
     @JsonProperty("name")
     private String name;
     @JsonProperty("description")
@@ -32,6 +22,8 @@ public class Video {
     private Channel channel;
     @JsonProperty("account")
     private User account;
+    @JsonProperty("comments")
+    private Integer numComments; // Only used to avoid unnecessary "GET comments" requests to videos with no comments
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY) //This attribute will be considered for the responses our API gives, but not when asking the PeerTube API for a video (as it provides a field named "comments" that is an Integer).
     private List<Comment> comments = new ArrayList<>();
@@ -39,12 +31,12 @@ public class Video {
 
 
     @JsonProperty("id")
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
     @JsonProperty("id")
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -95,6 +87,12 @@ public class Video {
     public void setAccount(User account) {
         this.account = account;
     }
+
+    @JsonProperty("comments")
+    public Integer getNumComments() { return numComments; }
+
+    @JsonProperty("comments")
+    public void setNumComments(Integer numComments) { this.numComments = numComments; }
 
     public List<Comment> getComments() { return comments; }
     public void setComments(List<Comment> comments) { this.comments = comments; }
