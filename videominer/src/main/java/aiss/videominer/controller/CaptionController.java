@@ -38,7 +38,7 @@ public class CaptionController {
     @Operation(
             summary = "Retrieve a list of captions",
             description = "Get a list of all available captions",
-            tags = {"GET", "Captions"})
+            tags = {"GET"})
     @ApiResponses({
             @ApiResponse(responseCode = "200", content = {@Content(schema = @Schema(implementation = Caption.class), mediaType = "application/json")})
     })
@@ -51,7 +51,7 @@ public class CaptionController {
     @Operation(
             summary = "Retrieve all captions of a video using its ID",
             description = "Get all available captions of a video by specifying its ID",
-            tags = {"GET", "Captions"})
+            tags = {"GET"})
     @ApiResponses({
             @ApiResponse(responseCode = "200", content = {@Content(schema = @Schema(implementation = Caption.class), mediaType = "application/json")}),
             @ApiResponse(responseCode = "404", content = {@Content(schema = @Schema())})
@@ -69,7 +69,7 @@ public class CaptionController {
     @Operation(
             summary = "Retrieve a caption by ID",
             description = "Get a Caption object by specifying its ID",
-            tags = {"GET", "Captions"})
+            tags = {"GET"})
     @ApiResponses({
             @ApiResponse(responseCode = "200", content = {@Content(schema = @Schema(implementation = Caption.class), mediaType = "application/json")}),
             @ApiResponse(responseCode = "404", content = {@Content(schema = @Schema())})
@@ -87,7 +87,7 @@ public class CaptionController {
     @Operation(
             summary = "Insert a caption in a video",
             description = "Add a caption whose data is passed in the body of the request in JSON format to a video by specifying its ID",
-            tags = {"POST", "Captions"})
+            tags = {"POST"})
     @ApiResponses({
             @ApiResponse(responseCode = "201", content = {@Content(schema = @Schema(implementation = Caption.class), mediaType = "application/json")}),
             @ApiResponse(responseCode = "400", content = {@Content(schema = @Schema())}),
@@ -110,7 +110,7 @@ public class CaptionController {
     @Operation(
             summary = "Update a caption",
             description = "Update a caption whose data is passed in the body of the request in JSON format by specifying its ID",
-            tags = {"PUT", "Captions"})
+            tags = {"PUT"})
     @ApiResponses({
             @ApiResponse(responseCode = "204", content = {@Content(schema = @Schema(implementation = Caption.class), mediaType = "application/json")}),
             @ApiResponse(responseCode = "400", content = {@Content(schema = @Schema())}),
@@ -135,7 +135,7 @@ public class CaptionController {
     @Operation(
             summary = "Delete a caption",
             description = "Delete a caption by specifying its ID",
-            tags = {"DELETE", "Captions"})
+            tags = {"DELETE"})
     @ApiResponses({
             @ApiResponse(responseCode = "204", content = {@Content(schema = @Schema(implementation = Caption.class), mediaType = "application/json")}),
             @ApiResponse(responseCode = "400", content = {@Content(schema = @Schema())}),

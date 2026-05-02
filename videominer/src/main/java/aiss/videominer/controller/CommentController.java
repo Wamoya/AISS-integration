@@ -38,7 +38,7 @@ public class CommentController {
     @Operation(
             summary = "Retrieve a list of comments",
             description = "Get a list of all available comments",
-            tags = {"GET", "Comments"})
+            tags = {"GET"})
     @ApiResponses({
             @ApiResponse(responseCode = "200", content = {@Content(schema = @Schema(implementation = Comment.class), mediaType = "application/json")})
     })
@@ -51,7 +51,7 @@ public class CommentController {
     @Operation(
             summary = "Retrieve all comments of a video using its ID",
             description = "Get all available comments of a video by specifying its ID",
-            tags = {"GET", "Comments"})
+            tags = {"GET"})
     @ApiResponses({
             @ApiResponse(responseCode = "200", content = {@Content(schema = @Schema(implementation = Comment.class), mediaType = "application/json")}),
             @ApiResponse(responseCode = "404", content = {@Content(schema = @Schema())})
@@ -69,7 +69,7 @@ public class CommentController {
     @Operation(
             summary = "Retrieve a comment by ID",
             description = "Get a Caption object by specifying its ID",
-            tags = {"GET", "Comments"})
+            tags = {"GET"})
     @ApiResponses({
             @ApiResponse(responseCode = "200", content = {@Content(schema = @Schema(implementation = Comment.class), mediaType = "application/json")}),
             @ApiResponse(responseCode = "404", content = {@Content(schema = @Schema())})
@@ -87,7 +87,7 @@ public class CommentController {
     @Operation(
             summary = "Insert a comment in a video",
             description = "Add a comment whose data is passed in the body of the request in JSON format to a video by specifying its ID",
-            tags = {"POST", "Comments"})
+            tags = {"POST"})
     @ApiResponses({
             @ApiResponse(responseCode = "201", content = {@Content(schema = @Schema(implementation = Comment.class), mediaType = "application/json")}),
             @ApiResponse(responseCode = "400", content = {@Content(schema = @Schema())}),
@@ -110,7 +110,7 @@ public class CommentController {
     @Operation(
             summary = "Update a comment",
             description = "Update a comment whose data is passed in the body of the request in JSON format by specifying its ID",
-            tags = {"PUT", "Comments"})
+            tags = {"PUT"})
     @ApiResponses({
             @ApiResponse(responseCode = "204", content = {@Content(schema = @Schema(implementation = Comment.class), mediaType = "application/json")}),
             @ApiResponse(responseCode = "400", content = {@Content(schema = @Schema())}),
@@ -135,7 +135,7 @@ public class CommentController {
     @Operation(
             summary = "Delete a comment",
             description = "Delete a comment by specifying its ID",
-            tags = {"DELETE", "Comments"})
+            tags = {"DELETE"})
     @ApiResponses({
             @ApiResponse(responseCode = "204", content = {@Content(schema = @Schema(implementation = Comment.class), mediaType = "application/json")}),
             @ApiResponse(responseCode = "400", content = {@Content(schema = @Schema())}),
