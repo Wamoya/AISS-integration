@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.ResourceAccessException;
 
 import java.util.HashMap;
 import java.util.List;
@@ -34,6 +35,12 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(HttpClientErrorException.NotFound.class)
     @ResponseBody
     public ResponseEntity<String> handleExternalNotFound(HttpClientErrorException.NotFound ex) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Resource not found in Dailymotion."); //Returns 404 when the Dailymotion API returns 404.
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Resource not found in Dailymotion. Likely the channel requested does not exist."); //Returns 404 when the Dailymotion API returns 404.
+    }
+
+    @ExceptionHandler(org.springframework.web.client.ResourceAccessException.class)
+    @ResponseBody
+    public ResponseEntity<String> handleConnectionFailure(ResourceAccessException ex) {
+        return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body("Service unavailable. Likely VideoMiner is not running."); // Returns 503 (Service Unavailable), intended for when VideoMiner is not running.
     }
 }
