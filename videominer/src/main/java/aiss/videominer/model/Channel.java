@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,7 +15,8 @@ import java.util.List;
 public class Channel {
 
     @Id
-    @JsonProperty("id")
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @JsonProperty("name")
@@ -32,13 +32,12 @@ public class Channel {
     private String createdTime;
 
     @JsonProperty("videos")
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "channelId")
     @NotNull(message = "Channel videos cannot be null")
     private List<Video> videos;
 
     public Channel() {
-        this.videos = new ArrayList<>();
     }
 
     public Channel(String name, String description, String createdTime) {

@@ -13,7 +13,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.persistence.Table;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,7 +23,7 @@ import java.util.Optional;
 
 @Tag(name = "Caption", description = "Caption management API")
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/videominer/v1")
 public class CaptionController {
 
     @Autowired
@@ -34,7 +33,7 @@ public class CaptionController {
     VideoRepository videoRepository;
 
 
-    // GET http://localhost:8080/apipath/captions
+    // GET http://localhost:8080/api/videominer/v1/captions
     @Operation(
             summary = "Retrieve a list of captions",
             description = "Get a list of all available captions",
@@ -47,7 +46,7 @@ public class CaptionController {
         return captionRepository.findAll();
     }
 
-    // GET http://localhost:8080/apipath/videos/{videoId}/captions
+    // GET http://localhost:8080/api/videominer/v1/videos/{videoId}/captions
     @Operation(
             summary = "Retrieve all captions of a video using its ID",
             description = "Get all available captions of a video by specifying its ID",
@@ -65,7 +64,7 @@ public class CaptionController {
         return video.get().getCaptions();
     }
 
-    // GET http://localhost:8080/apipath/captions/{captionId}
+    // GET http://localhost:8080/api/videominer/v1/captions/{captionId}
     @Operation(
             summary = "Retrieve a caption by ID",
             description = "Get a Caption object by specifying its ID",
@@ -83,7 +82,7 @@ public class CaptionController {
         return caption.get();
     }
 
-    // POST http://localhost:8080/apipath/videos/{videoId}/captions
+    // POST http://localhost:8080/api/videominer/v1/videos/{videoId}/captions
     @Operation(
             summary = "Insert a caption in a video",
             description = "Add a caption whose data is passed in the body of the request in JSON format to a video by specifying its ID",
@@ -106,7 +105,7 @@ public class CaptionController {
         return captionRepository.save(caption);
     }
 
-    // PUT http://localhost:8080/apipath/captions/{captionId}
+    // PUT http://localhost:8080/api/videominer/v1/captions/{captionId}
     @Operation(
             summary = "Update a caption",
             description = "Update a caption whose data is passed in the body of the request in JSON format by specifying its ID",
@@ -131,7 +130,7 @@ public class CaptionController {
         captionRepository.save(_caption);
     }
 
-    // DELETE http://localhost:8080/apipath/captions/{captionId}
+    // DELETE http://localhost:8080/api/videominer/v1/captions/{captionId}
     @Operation(
             summary = "Delete a caption",
             description = "Delete a caption by specifying its ID",

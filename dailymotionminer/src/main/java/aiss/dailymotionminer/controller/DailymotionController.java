@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/dailymotionminer")
+@RequestMapping("/api/dailymotionminer/v1")
 public class DailymotionController {
 
     @Autowired
@@ -30,7 +30,7 @@ public class DailymotionController {
 
     @PostMapping("/{channelName}")
     public VM_Channel postVideosFromChannel(@PathVariable String channelName,
-                                            @RequestParam(name = "maxVideos", defaultValue = "10") @Min(1) @Max(1000) Integer maxVideos,
+                                            @RequestParam(name = "maxVideos", defaultValue = "10") @Min(0) @Max(1000) Integer maxVideos,
                                             @RequestParam(name = "maxComments", defaultValue = "2") @Min(0) Integer maxComments) {
         Channel channel = channelService.getChannelFull(channelName, maxVideos, maxComments);
         VM_Channel vm_channel = Transformer.toVMChannel(channel);

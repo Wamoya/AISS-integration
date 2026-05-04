@@ -16,7 +16,8 @@ import java.util.List;
 public class Video {
 
     @Id
-    @JsonProperty("id")
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @JsonProperty("name")
@@ -32,18 +33,18 @@ public class Video {
     private String releaseTime;
 
     @JsonProperty("user")
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @NotNull(message = "Video author cannot be null")
     private User user;
 
     @JsonProperty("comments")
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "videoId")
     @NotNull(message = "Video comments cannot be null")
     private List<Comment> comments;
 
     @JsonProperty("captions")
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "videoId")
     @NotNull(message = "Video captions cannot be null")
     private List<Caption> captions;
@@ -53,11 +54,13 @@ public class Video {
         this.captions = new ArrayList<>();
     }
 
-    public Video(String name, String description, String releaseTime, Channel author, List<Comment> comments, List<Caption> captions) {
+    public Video(String name, String description, String releaseTime, User user, List<Comment> comments, List<Caption> captions) {
         this.name = name;
         this.description = description;
         this.releaseTime = releaseTime;
-        this.author = author;
+        this.user = user;
+        this.comments = comments;
+        this.captions = captions;
     }
 
     public Long getId() {
@@ -90,6 +93,14 @@ public class Video {
 
     public void setReleaseTime(String releaseTime) {
         this.releaseTime = releaseTime;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public List<Comment> getComments() {

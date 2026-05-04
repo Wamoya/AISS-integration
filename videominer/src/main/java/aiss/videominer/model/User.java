@@ -11,8 +11,8 @@ import jakarta.persistence.*;
 public class User {
 
     @Id
-    @JsonProperty("id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @JsonProperty("name")

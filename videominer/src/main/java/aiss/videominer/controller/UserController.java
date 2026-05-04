@@ -1,11 +1,8 @@
 package aiss.videominer.controller;
 
 import aiss.videominer.exception.UserNotFoundException;
-import aiss.videominer.exception.VideoNotFoundException;
 import aiss.videominer.model.User;
-import aiss.videominer.model.Video;
 import aiss.videominer.repository.UserRepository;
-import aiss.videominer.repository.VideoRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -13,7 +10,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.persistence.AssociationOverride;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,12 +20,12 @@ import java.util.Optional;
 
 @Tag(name="User", description="User management API")
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/videominer/v1")
 public class UserController {
     @Autowired
     UserRepository userRepository;
 
-    // GET http://localhost:8080/apipath/users
+    // GET http://localhost:8080/api/videominer/v1/users
     @Operation(
             summary = "Retrieve a list of users",
             description = "Get a list of all available users",
@@ -44,7 +40,7 @@ public class UserController {
 
     // TODO: implement GET that gives User from video ID?
 
-    // GET http://localhost:8080/apipath/users/{userId}
+    // GET http://localhost:8080/api/videominer/v1/users/{userId}
     @Operation(
             summary = "Retrieve a user by ID",
             description = "Get a User object by specifying it's ID",
@@ -62,7 +58,7 @@ public class UserController {
         return user.get();
     }
 
-    // POST http://localhost:8080/apipath/users
+    // POST http://localhost:8080/api/videominer/v1/users
     @Operation(
             summary = "Insert a user",
             description = "Add a user whose data is passed in the body of the request in JSON format by specifying its ID",
@@ -78,7 +74,7 @@ public class UserController {
         return userRepository.save(user);
     }
 
-    // PUT http://localhost:8080/apipath/users/{userId}
+    // PUT http://localhost:8080/api/videominer/v1/users/{userId}
     @Operation(
             summary = "Update a user",
             description = "Update a user whose data is passed in the body of the request in JSON format by specifying its ID",
@@ -103,7 +99,7 @@ public class UserController {
         userRepository.save(_user);
     }
 
-    // DELETE http://localhost:8080/apipath/users/{userId}
+    // DELETE http://localhost:8080/api/videominer/v1/users/{userId}
     @Operation(
             summary = "Delete a user",
             description = "Delete a user by specifying it's ID",
