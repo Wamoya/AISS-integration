@@ -24,7 +24,7 @@ import java.util.Optional;
 
 @Tag(name = "Comment", description = "Comment management API")
 @RestController
-@RequestMapping("/api/videominer/v1")
+@RequestMapping("/api")
 public class CommentController {
 
     @Autowired

@@ -3,22 +3,14 @@ package aiss.peertubeminer.controller;
 import aiss.peertubeminer.model.peertube.*;
 import aiss.peertubeminer.model.videominer.*;
 import aiss.peertubeminer.service.ChannelService;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.Min;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-@Tag(name = "PeerTube", description = "PeerTune management")
 @RestController
 @RequestMapping("/api/peertubeminer")
 public class PeertubeController {
@@ -26,16 +18,6 @@ public class PeertubeController {
     @Autowired
     ChannelService channelService;
 
-    @Operation(
-            summary = "Retrieve a channel by channel name",
-            description = "Get all video objects associated to a channel from PeerTube by its channel name",
-            tags = {"GET"}
-    )
-    @ApiResponses({
-            @ApiResponse(responseCode = "200", content = { @Content(schema = @Schema(implementation = VM_Channel.class), mediaType = "application/json") }),
-            @ApiResponse(responseCode = "400", content = { @Content(schema = @Schema()) }),
-            @ApiResponse(responseCode = "404", content = { @Content(schema = @Schema()) }),
-    })
     @GetMapping("/{channelName}")
     public Channel getVideosFromChannel(@PathVariable String channelName,
                                         @RequestParam(name = "maxVideos", defaultValue = "10") @Min(0) Integer maxVideos,
@@ -43,17 +25,6 @@ public class PeertubeController {
         return channelService.getChannelFull(channelName, maxVideos, maxComments);
     }
 
-    @Operation(
-            summary = "Insert a channel in Videominer",
-            description = "Insert a channel from PeerTube into Videominer",
-            tags = {"POST"}
-    )
-    @ApiResponses({
-            @ApiResponse(responseCode = "201", content = { @Content(schema = @Schema(implementation = VM_Channel.class), mediaType = "application/json") }),
-            @ApiResponse(responseCode = "400", content = { @Content(schema = @Schema()) }),
-            @ApiResponse(responseCode = "404", content = { @Content(schema = @Schema()) }),
-    })
-    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/{channelName}")
     public VM_Channel postVideosFromChannel(@PathVariable String channelName,
                                             @RequestParam(name = "maxVideos", defaultValue = "10") @Min(0) Integer maxVideos,

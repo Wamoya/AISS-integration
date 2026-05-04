@@ -24,7 +24,7 @@ import java.util.Optional;
 
 @Tag(name="User", description="User management API")
 @RestController
-@RequestMapping("/api/videominer/v1")
+@RequestMapping("/api")
 public class UserController {
     @Autowired
     UserRepository userRepository;
@@ -47,7 +47,7 @@ public class UserController {
     // GET http://localhost:8080/apipath/users/{userId}
     @Operation(
             summary = "Retrieve a user by ID",
-            description = "Get a User object by specifying its ID",
+            description = "Get a User object by specifying it's ID",
             tags = {"GET"})
     @ApiResponses({
             @ApiResponse(responseCode = "200", content = {@Content(schema = @Schema(implementation = User.class), mediaType = "application/json")}),
@@ -106,7 +106,7 @@ public class UserController {
     // DELETE http://localhost:8080/apipath/users/{userId}
     @Operation(
             summary = "Delete a user",
-            description = "Delete a user by specifying its ID",
+            description = "Delete a user by specifying it's ID",
             tags = {"DELETE"})
     @ApiResponses({
             @ApiResponse(responseCode = "204", content = {@Content(schema = @Schema(implementation = User.class), mediaType = "application/json")}),

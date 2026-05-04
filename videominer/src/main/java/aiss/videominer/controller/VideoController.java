@@ -11,18 +11,18 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/videominer/v1")
+@RequestMapping("/api")
 public class VideoController {
     @Autowired
     VideoRepository videoRepository;
 
-    // GET http://localhost:8080/apipath/videos
+    // GET http://localhost:8080/api/videos
     @GetMapping("/videos")
     public List<Video> findAllVideos() {
         return videoRepository.findAll();
     }
 
-    // GET http://localhost:8080/apipath/videos/{videoId}
+    // GET http://localhost:8080/api/videos/{videoId}
     @GetMapping("/videos/{videoId}")
     public Video findAllVideosById(@PathVariable("videoId") Long id) {
         return videoRepository.findById(id).get();
