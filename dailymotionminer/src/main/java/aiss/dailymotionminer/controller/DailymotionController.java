@@ -16,11 +16,13 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+@Tag(name = "Dailymotion", description = "Dailymotion management")
 @RestController
 @RequestMapping("/api/dailymotionminer")
 public class DailymotionController {
@@ -30,6 +32,16 @@ public class DailymotionController {
     @Autowired
     VideoMinerService videoMinerService;
 
+    @Operation(
+            summary = "Retrieve a channel by channel name",
+            description = "Get all video objects associated to a channel from Dailymotion by its channel name",
+            tags = {"GET"}
+    )
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", content = { @Content(schema = @Schema(implementation = VM_Channel.class), mediaType = "application/json") }),
+            @ApiResponse(responseCode = "400", content = { @Content(schema = @Schema()) }),
+            @ApiResponse(responseCode = "404", content = { @Content(schema = @Schema()) }),
+    })
     @GetMapping("/{channelName}")
     public Channel getVideosFromChannel(@PathVariable String channelName,
                                         @RequestParam(name = "maxVideos", defaultValue = "10") @Min(0) @Max(1000) Integer maxVideos, //The Dailymotion API allows for a maximum of 10 pages with a maximum 100 videos per page, so our API will be able to request at most 1000 videos from a channel.
@@ -37,6 +49,17 @@ public class DailymotionController {
         return channelService.getChannelFull(channelName, maxVideos, maxComments);
     }
 
+    @Operation(
+            summary = "Insert a channel in Videominer",
+            description = "Insert a channel from Dailymotion into Videominer",
+            tags = {"POST"}
+    )
+    @ApiResponses({
+            @ApiResponse(responseCode = "201", content = { @Content(schema = @Schema(implementation = VM_Channel.class), mediaType = "application/json") }),
+            @ApiResponse(responseCode = "400", content = { @Content(schema = @Schema()) }),
+            @ApiResponse(responseCode = "404", content = { @Content(schema = @Schema()) }),
+    })
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/{channelName}")
     public VM_Channel postVideosFromChannel(@PathVariable String channelName,
                                             @RequestParam(name = "maxVideos", defaultValue = "10") @Min(1) @Max(1000) Integer maxVideos,
@@ -114,9 +137,6 @@ public class DailymotionController {
                     )
             );
         }
-
-
-
 
         VM_Channel savedChannel = videoMinerService.sendChannel(vm_channel);
 
