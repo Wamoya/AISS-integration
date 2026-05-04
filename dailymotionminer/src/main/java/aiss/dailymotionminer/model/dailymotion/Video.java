@@ -1,7 +1,6 @@
 
 package aiss.dailymotionminer.model.dailymotion;
 
-import javax.annotation.processing.Generated;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -19,7 +18,6 @@ import java.util.List;
     "comments", // -> actual parsed comments
     "captions"
 })
-@Generated("jsonschema2pojo")
 public class Video {
 
     @JsonProperty("id")

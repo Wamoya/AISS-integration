@@ -1,7 +1,6 @@
 
 package aiss.dailymotionminer.model.dailymotion;
 
-import javax.annotation.processing.Generated;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -13,7 +12,6 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "url", // -> user_link
     "avatar_240_url" // -> picture_link
 })
-@Generated("jsonschema2pojo")
 public class User {
 
     @JsonProperty("id")

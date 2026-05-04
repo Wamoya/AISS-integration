@@ -15,21 +15,16 @@ public class VideoMinerService {
     }
 
     public VM_Channel sendChannel(VM_Channel channelToSend) {
-
         String videoMinerUrl = "http://localhost:8080/api/videominer/channels";
 
-
-
         try {
-
             VM_Channel savedChannel = restTemplate.postForObject(videoMinerUrl, channelToSend, VM_Channel.class);
-
             return savedChannel;
 
         } catch (Exception e) {
-
             System.err.println(e.getMessage());
             return null;
+
         }
     }
 }

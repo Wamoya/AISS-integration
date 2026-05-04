@@ -13,14 +13,10 @@ public class VM_Caption {
     @JsonProperty("language")
     private String language;
 
-    @JsonProperty("createdAt")
-    private String createdAt;
-
-    public VM_Caption(String id, String link, String language, String createdAt) {
+    public VM_Caption(String id, String link, String language) {
         this.id = id;
         this.link = link;
         this.language = language;
-        this.createdAt = createdAt;
     }
 
     public String getId() { return id; }
@@ -35,17 +31,12 @@ public class VM_Caption {
 
     public void setLanguage(String language) { this.language = language; }
 
-    public String getCreatedAt() { return createdAt; }
-
-    public void setCreatedAt(String createdAt) { this.createdAt = createdAt; }
-
     @Override
     public String toString() {
         return "VM_Caption{" +
                 "id='" + id + '\'' +
                 ", link='" + link + '\'' +
                 ", language='" + language + '\'' +
-                ", createdAt='" + createdAt + '\'' +
                 '}';
     }
 }
