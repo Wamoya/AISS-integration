@@ -2,7 +2,6 @@
 package aiss.peertubeminer.model.peertube;
 
 import java.util.List;
-import javax.annotation.processing.Generated;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -12,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "total",
     "data"
 })
-@Generated("jsonschema2pojo")
 public class Caption_Data {
 
     @JsonProperty("total")

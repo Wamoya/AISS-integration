@@ -1,7 +1,5 @@
 package aiss.peertubeminer.model.videominer;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +9,6 @@ public class VM_Video {
     private String name;
     private String description;
     private String releaseTime;
-    private VM_Channel channel;
     private VM_User user;
     private List<VM_Comment> comments;
     private List<VM_Caption> captions;
@@ -65,9 +62,6 @@ public class VM_Video {
     public void setReleaseTime(String releaseTime) {
         this.releaseTime = releaseTime;
     }
-
-    public VM_Channel getChannel() { return channel; }
-    public void setChannel(VM_Channel channel) { this.channel = channel; }
 
     public VM_User getUser() { return user; }
     public void SetUser(VM_User user) { this.user = user; }
