@@ -1,6 +1,5 @@
 package aiss.peertubeminer.model.videominer;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class VM_Video {
@@ -13,7 +12,6 @@ public class VM_Video {
     private List<VM_Comment> comments;
     private List<VM_Caption> captions;
 
-    // Constructor 1. All parameters
     public VM_Video(String id, String name, String description, String releaseTime, VM_User user, List<VM_Comment> comments, List<VM_Caption> captions) {
         this.id = id;
         this.name = name;
@@ -22,17 +20,6 @@ public class VM_Video {
         this.user = user;
         this.comments = comments;
         this.captions = captions;
-    }
-
-    // Constructor 2. User, Comments and Captions start empty
-    public VM_Video(String id, String name, String description, String releaseTime) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.releaseTime = releaseTime;
-        this.user = null;
-        this.comments = new ArrayList<>();
-        this.captions = new ArrayList<>();
     }
 
     public String getId() {

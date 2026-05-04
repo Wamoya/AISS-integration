@@ -4,6 +4,7 @@ import aiss.peertubeminer.etl.Transformer;
 import aiss.peertubeminer.model.peertube.*;
 import aiss.peertubeminer.model.videominer.*;
 import aiss.peertubeminer.service.ChannelService;
+import aiss.peertubeminer.service.VideoMinerService;
 import jakarta.validation.constraints.Min;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,8 @@ public class PeertubeController {
 
     @Autowired
     ChannelService channelService;
+    @Autowired
+    VideoMinerService videoMinerService;
 
     @GetMapping("/{channelName}")
     public VM_Channel getVideosFromChannel(@PathVariable String channelName,
@@ -29,7 +32,7 @@ public class PeertubeController {
                                             @RequestParam(name = "maxComments", defaultValue = "2") @Min(0) Integer maxComments) {
         Channel channel = channelService.getChannelFull(channelName, maxVideos, maxComments);
         VM_Channel vm_channel = Transformer.toVMChannel(channel);
-        // TODO. Send the VM objects to VM Miner
-        return vm_channel;
+        VM_Channel savedChannel = videoMinerService.sendChannel(vm_channel);
+        return savedChannel;
     }
 }
