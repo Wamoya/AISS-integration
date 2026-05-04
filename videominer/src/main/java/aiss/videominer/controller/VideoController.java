@@ -18,13 +18,13 @@ public class VideoController {
 
     // GET http://localhost:8080/api/videominer/v1/videos
     @GetMapping("/videos")
-    public List<Video> findAllVideos() {
+    public List<Video> findAll() {
         return videoRepository.findAll();
     }
 
     // GET http://localhost:8080/api/videominer/v1/videos/{videoId}
     @GetMapping("/videos/{videoId}")
-    public Video findAllVideosById(@PathVariable("videoId") Long id) {
+    public Video findOne(@PathVariable("videoId") Long id) {
         return videoRepository.findById(id).get();
     }
 }

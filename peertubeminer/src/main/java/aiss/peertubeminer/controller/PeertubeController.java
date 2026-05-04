@@ -19,20 +19,19 @@ public class PeertubeController {
     VideoMinerService videoMinerService;
 
     @GetMapping("/{channelName}")
-    public VM_Channel getVideosFromChannel(@PathVariable String channelName,
-                                        @RequestParam(name = "maxVideos", defaultValue = "10") @Min(0) Integer maxVideos,
-                                        @RequestParam(name = "maxComments", defaultValue = "2") @Min(0) Integer maxComments) {
-        Channel channel = channelService.getChannelFull(channelName, maxVideos, maxComments);
+    public VM_Channel getChannel(@PathVariable String channelName,
+                                 @RequestParam(name = "maxVideos", defaultValue = "10") @Min(0) Integer maxVideos,
+                                 @RequestParam(name = "maxComments", defaultValue = "2") @Min(0) Integer maxComments) {
+        Channel channel = channelService.getChannelWithVideos(channelName, maxVideos, maxComments);
         return Transformer.toVMChannel(channel);
     }
 
     @PostMapping("/{channelName}")
-    public VM_Channel postVideosFromChannel(@PathVariable String channelName,
-                                            @RequestParam(name = "maxVideos", defaultValue = "10") @Min(0) Integer maxVideos,
-                                            @RequestParam(name = "maxComments", defaultValue = "2") @Min(0) Integer maxComments) {
-        Channel channel = channelService.getChannelFull(channelName, maxVideos, maxComments);
+    public VM_Channel postChannel(@PathVariable String channelName,
+                                  @RequestParam(name = "maxVideos", defaultValue = "10") @Min(0) Integer maxVideos,
+                                  @RequestParam(name = "maxComments", defaultValue = "2") @Min(0) Integer maxComments) {
+        Channel channel = channelService.getChannelWithVideos(channelName, maxVideos, maxComments);
         VM_Channel vm_channel = Transformer.toVMChannel(channel);
-        VM_Channel savedChannel = videoMinerService.sendChannel(vm_channel);
-        return savedChannel;
+        return videoMinerService.postChannel(vm_channel);
     }
 }

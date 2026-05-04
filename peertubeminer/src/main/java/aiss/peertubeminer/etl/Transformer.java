@@ -14,7 +14,7 @@ public class Transformer {
 
     public static VM_Channel toVMChannel(Channel channel){
         VM_Channel vm_channel = new VM_Channel(
-                UUID.randomUUID().toString(),
+                null, //id
                 channel.getName(),
                 channel.getDescription(),
                 String.valueOf(channel.getCreatedAt()),
@@ -32,7 +32,7 @@ public class Transformer {
 
     public static VM_Video toVMVideo(Video video) {
         VM_Video vm_video = new VM_Video(
-                UUID.randomUUID().toString(),
+                null, //id
                 video.getName(),
                 video.getDescription(),
                 String.valueOf(video.getPublishedAt()),
@@ -58,7 +58,7 @@ public class Transformer {
 
     public static VM_User toVMUser(Video video){
         return new VM_User(
-                UUID.randomUUID().toString(),
+                null, //id
                 video.getAccount().getName(),
                 video.getAccount().getUrl(),
                 video.getAccount().getAvatars().stream().findFirst().isPresent()
@@ -69,7 +69,7 @@ public class Transformer {
 
     public static VM_Comment toVMComment(Comment comment){
         return new VM_Comment(
-                UUID.randomUUID().toString(),
+                null, //id
                 comment.getText(),
                 comment.getCreatedAt()
         );
@@ -77,7 +77,7 @@ public class Transformer {
 
     public static VM_Caption toVMCaption(Caption caption){
         return new VM_Caption(
-                UUID.randomUUID().toString(),
+                null, //id
                 caption.getFileUrl(),
                 caption.getLanguage().getLabel()
         );

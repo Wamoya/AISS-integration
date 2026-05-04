@@ -14,10 +14,10 @@ public class VideoMinerService {
         this.restTemplate = new RestTemplate();
     }
 
-    public VM_Channel sendChannel(VM_Channel channelToSend) {
-        String videoMinerUrl = "http://localhost:8080/api/videominer/v1/channels";
-        VM_Channel savedChannel = restTemplate.postForObject(videoMinerUrl, channelToSend, VM_Channel.class);
-        return savedChannel;
+    String BASE_URI = "http://localhost:8080/api/videominer/v1";
 
+    public VM_Channel postChannel(VM_Channel channelToSend) {
+        String videoMinerUrl = BASE_URI + "/channels";
+        return restTemplate.postForObject(videoMinerUrl, channelToSend, VM_Channel.class);
     }
 }

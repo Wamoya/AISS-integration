@@ -1,7 +1,6 @@
 package aiss.peertubeminer.service;
 
 import aiss.peertubeminer.model.peertube.*;
-import aiss.peertubeminer.model.videominer.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -21,7 +20,7 @@ public class VideoService {
 
     String BASE_URI = "https://peertube.tv/api/v1";
 
-    public List<Video> getAllVideosFromChannel(String channelHandle, Integer maxVideos) {
+    public List<Video> getVideosFromChannel(String channelHandle, Integer maxVideos) {
         if (maxVideos == 0) return Collections.emptyList(); //To avoid unnecessary API requests.
 
         int remaining = maxVideos;
@@ -63,7 +62,7 @@ public class VideoService {
         return videos;
     }
 
-    public Video getVideoFull(Video video, Integer maxComments) {
+    public Video getVideoWithCommentsAndCaptions(Video video, Integer maxComments) {
         List<Comment> comments = commentService.getCommentsFromVideo(video, maxComments);
         video.setComments(comments);
 

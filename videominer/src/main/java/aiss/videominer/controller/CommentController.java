@@ -57,7 +57,7 @@ public class CommentController {
             @ApiResponse(responseCode = "404", content = {@Content(schema = @Schema())})
     })
     @GetMapping("videos/{videoId}/comments")
-    public List<Comment> getAllCommentsFromVideo(@Parameter(description = "Video ID to which the comments belong") @PathVariable("videoId") Long videoId) throws VideoNotFoundException {
+    public List<Comment> getCommentsFromVideo(@Parameter(description = "Video ID to which the comments belong") @PathVariable("videoId") Long videoId) throws VideoNotFoundException {
         Optional<Video> video = videoRepository.findById(videoId);
         if (!video.isPresent()) {
             throw new VideoNotFoundException();

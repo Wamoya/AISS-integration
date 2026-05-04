@@ -24,15 +24,15 @@ public class ChannelService {
         return restTemplate.getForObject(uri, Channel.class);
     }
 
-    public Channel getChannelFull(String name, Integer maxVideos, Integer maxComments) {
+    public Channel getChannelWithVideos(String name, Integer maxVideos, Integer maxComments) {
         Channel channel = getChannel(name);
         List<Video> videos = new ArrayList<>();
-        List<Video> allVideos = videoService.getAllVideosFromChannel(name, maxVideos);
+        List<Video> allVideos = videoService.getVideosFromChannel(name, maxVideos);
         boolean do_throttle = allVideos.size() > 20; // If #videos exceeds the threshold, throttle the process to avoid "code 429" errors
 
         for (Video v : allVideos) {
             videos.add(
-                    videoService.getVideoFull(v, maxComments)
+                    videoService.getVideoWithCommentsAndCaptions(v, maxComments)
             );
             throttle(do_throttle);
         }

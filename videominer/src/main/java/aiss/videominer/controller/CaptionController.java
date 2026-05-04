@@ -28,10 +28,8 @@ public class CaptionController {
 
     @Autowired
     CaptionRepository captionRepository;
-
     @Autowired
     VideoRepository videoRepository;
-
 
     // GET http://localhost:8080/api/videominer/v1/captions
     @Operation(
@@ -56,7 +54,7 @@ public class CaptionController {
             @ApiResponse(responseCode = "404", content = {@Content(schema = @Schema())})
     })
     @GetMapping("videos/{videoId}/captions")
-    public List<Caption> getAllCaptionsFromVideo(@Parameter(description = "Video ID to which the captions belong") @PathVariable("videoId") Long videoId) throws VideoNotFoundException {
+    public List<Caption> getCaptionsFromVideo(@Parameter(description = "Video ID to which the captions belong") @PathVariable("videoId") Long videoId) throws VideoNotFoundException {
         Optional<Video> video = videoRepository.findById(videoId);
         if (!video.isPresent()) {
             throw new VideoNotFoundException();

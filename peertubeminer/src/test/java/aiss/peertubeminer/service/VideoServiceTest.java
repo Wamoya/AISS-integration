@@ -20,7 +20,7 @@ class VideoServiceTest {
     @Test
     @DisplayName("Get videos from a video channel. (Default values)")
     void findVideosFromChannelDefault() {
-        List<Video> videos = service.getAllVideosFromChannel(test_ChannelHandle);
+        List<Video> videos = service.getVideosFromChannel(test_ChannelHandle);
         assertFalse(videos.isEmpty());
         System.out.println(videos);
     }
@@ -28,7 +28,7 @@ class VideoServiceTest {
     @Test
     @DisplayName("Get videos from a video channel. (maxVideos=2&maxComments=10)")
     void findVideosFromChannelParams() {
-        List<Video> videos = service.getAllVideosFromChannel(test_ChannelHandle, 2, 10);
+        List<Video> videos = service.getVideosFromChannel(test_ChannelHandle, 2, 10);
         assertFalse(videos.isEmpty());
         System.out.println(videos);
     }
