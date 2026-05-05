@@ -19,8 +19,8 @@ public class CommentService {
 
     String BASE_URI = "https://api.dailymotion.com";
 
-    public List<Comment> getCommentsFromVideo(String videoId, Integer maxComments) {
-        if (maxComments == 0) return Collections.emptyList(); //To avoid unnecessary API requests.
+    public List<Comment> getCommentsFromVideo(String videoId) {
+//        if (maxPages == 0) return Collections.emptyList(); //To avoid unnecessary API requests.
 
         String uri = BASE_URI + "/video/" + videoId
                 + "?fields=id,title,description,created_time,tags";
@@ -32,7 +32,7 @@ public class CommentService {
 
         if(tags != null) {
             comments = tags.stream()
-                    .limit(maxComments)
+//                    .limit(maxPages)
                     .map(tag -> new Comment(
                             null, //id
                             tag, //Video tag

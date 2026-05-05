@@ -25,7 +25,7 @@ public class VideoService {
 
     String BASE_URI = "https://api.dailymotion.com";
 
-    public List<Video> getVideosFromChannel(String profileId, Integer maxVideos) {
+    public List<Video> getVideosFromChannel(String profileId, Integer maxVideos, Integer maxPages) {
         if (maxVideos == 0) return Collections.emptyList(); //To avoid unnecessary API requests.
 
         int remainingVideos = maxVideos;
@@ -48,14 +48,14 @@ public class VideoService {
             remainingVideos -= limit; //Subtract obtained videos.
             page++;
 
-        } while(response.getBody().getHasMore() && (videos.size() < maxVideos));
+        } while(response.getBody().getHasMore() && (videos.size() < maxVideos) && page < maxPages);
 
         return videos;
     }
 
-    public Video getVideoWithCommentsAndCaptions(Video video, Integer maxComments) {
+    public Video getVideoWithCommentsAndCaptions(Video video) {
         String videoId = video.getId();
-        List<Comment> comments = commentService.getCommentsFromVideo(videoId, maxComments);
+        List<Comment> comments = commentService.getCommentsFromVideo(videoId);
         video.setComments(comments);
 
         List<Caption> captions = captionService.getCaptionsFromVideo(videoId);

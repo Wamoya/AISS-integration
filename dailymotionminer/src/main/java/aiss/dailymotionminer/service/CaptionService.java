@@ -29,6 +29,5 @@ public class CaptionService {
         }
 
         return captions;
-
     }
 }

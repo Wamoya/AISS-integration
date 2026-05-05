@@ -51,7 +51,7 @@ public class VideoService {
 
             if (possible && remaining > 0) { // Delay before iterating again to avoid "code 429" errors.
                 try {
-                    Thread.sleep(300);
+                    Thread.sleep(500);
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
                     throw new RuntimeException("The thread was interrupted during the pause.", e);
