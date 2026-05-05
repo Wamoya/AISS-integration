@@ -84,40 +84,20 @@ public class Channel {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(Channel.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
-        sb.append("id");
-        sb.append('=');
-        sb.append(((this.id == null)?"<null>":this.id));
-        sb.append(',');
-        sb.append("screenname");
-        sb.append('=');
-        sb.append(((this.screenname == null)?"<null>":this.screenname));
-        sb.append(',');
-        sb.append("description");
-        sb.append('=');
-        sb.append(((this.description == null)?"<null>":this.description));
-        sb.append(',');
-        sb.append("createdTime");
-        sb.append('=');
-        sb.append(((this.createdTime == null)?"<null>":this.createdTime));
-        sb.append(',');
-        sb.append("url");
-        sb.append('=');
-        sb.append(((this.url == null)?"<null>":this.url));
-        sb.append(',');
+        sb.append(Channel.class.getName())
+                .append('@')
+                .append(Integer.toHexString(System.identityHashCode(this)))
+                .append('[');
 
-        // --- AÑADIDO: avatar_240_url ---
-        sb.append("avatar_240_url");
-        sb.append('=');
-        sb.append(((this.avatar240url == null)?"<null>":this.avatar240url));
-        sb.append(',');
-        if (sb.charAt((sb.length()- 1)) == ',') {
-            sb.setCharAt((sb.length()- 1), ']');
-        } else {
-            sb.append(']');
-        }
+        sb.append("id=").append(id != null ? id : "<null>").append(", ");
+        sb.append("screenname=").append(screenname != null ? screenname : "<null>").append(", ");
+        sb.append("description=").append(description != null ? description : "<null>").append(", ");
+        sb.append("createdTime=").append(createdTime != null ? createdTime : "<null>").append(", ");
+        sb.append("url=").append(url != null ? url : "<null>").append(", ");
+        sb.append("avatar240Url=").append(avatar240url != null ? avatar240url : "<null>");
+        sb.append(']');
+
         return sb.toString();
     }
-
 
 }
