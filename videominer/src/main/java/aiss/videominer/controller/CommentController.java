@@ -68,7 +68,7 @@ public class CommentController {
     // GET http://localhost:8080/api/videominer/v1/comments/{commentId}
     @Operation(
             summary = "Retrieve a comment by ID",
-            description = "Get a Caption object by specifying its ID",
+            description = "Get a Comment object by specifying its ID",
             tags = {"GET"})
     @ApiResponses({
             @ApiResponse(responseCode = "200", content = {@Content(schema = @Schema(implementation = Comment.class), mediaType = "application/json")}),

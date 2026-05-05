@@ -40,15 +40,15 @@ public class ChannelController {
 
     // GET http://localhost:8080/api/videominer/v1/channels/{channelId}
     @Operation(
-            summary = "Retrieve a channel by it's ID",
-            description = "Get a channel by specifying it's ID",
+            summary = "Retrieve a channel by ID",
+            description = "Get a Channel object by specifying its ID",
             tags = {"GET"})
     @ApiResponses({
             @ApiResponse(responseCode = "200", content = {@Content(schema = @Schema(implementation = Channel.class), mediaType = "application/json")}),
             @ApiResponse(responseCode = "404", content = {@Content(schema = @Schema())})
     })
     @GetMapping("/channels/{channelId}")
-    public Channel findOne(@Parameter(description = "ID of channel to retrieve") @PathVariable("channelId") Long channelId) throws ChannelNotFoundException {
+    public Channel findOne(@Parameter(description = "ID of channel to be searched") @PathVariable("channelId") Long channelId) throws ChannelNotFoundException {
         Optional<Channel> channel = channelRepository.findById(channelId);
         if(!channel.isPresent()) {
             throw new ChannelNotFoundException();
@@ -59,7 +59,7 @@ public class ChannelController {
     // POST http://localhost:8080/api/videominer/v1/channels
     @Operation(
             summary = "Insert a channel",
-            description = "Add a channel whose data is passed in the body of the request in JSON format by specifying it's ID",
+            description = "Add a channel whose data is passed in the body of the request in JSON format by specifying its ID",
             tags = {"POST"})
     @ApiResponses({
             @ApiResponse(responseCode = "201", content = {@Content(schema = @Schema(implementation = Channel.class), mediaType = "application/json")}),
@@ -81,7 +81,7 @@ public class ChannelController {
     // PUT http://localhost:8080/api/videominer/v1/channels/{channelId}
     @Operation(
             summary = "Update a channel",
-            description = "Update a channel whose data is passed in the body of the request in JSON format by specifying it's ID",
+            description = "Update a channel whose data is passed in the body of the request in JSON format by specifying its ID",
             tags = {"PUT"})
     @ApiResponses({
             @ApiResponse(responseCode = "204", content = {@Content(schema = @Schema(implementation = Channel.class), mediaType = "application/json")}),
@@ -90,7 +90,7 @@ public class ChannelController {
     })
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping("/channels/{channelId}")
-    public void update(@Parameter(description = "Update a channel") @PathVariable("channelId")  Long channelId,
+    public void update(@Parameter(description = "ID of the channel to be updated") @PathVariable("channelId")  Long channelId,
                        @Valid @RequestBody Channel updatedChannel) throws ChannelNotFoundException {
         Optional<Channel> channelData = channelRepository.findById(channelId);
         if(!channelData.isPresent()) {
@@ -106,8 +106,8 @@ public class ChannelController {
 
     // DELETE http://localhost:8080/api/videominer/v1/channels/{channelId}
     @Operation(
-            summary = "",
-            description = "",
+            summary = "Delete a channel",
+            description = "Delete a channel by specifying its ID",
             tags = {"DELETE"})
     @ApiResponses({
             @ApiResponse(responseCode = "204", content = {@Content(schema = @Schema(implementation = Channel.class), mediaType = "application/json")}),
@@ -116,7 +116,7 @@ public class ChannelController {
     })
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/channels/{channelId}")
-    public void delete(@Parameter(description = "Delete a channel") @PathVariable("channelId") Long channelId) throws ChannelNotFoundException {
+    public void delete(@Parameter(description = "ID of the channel to be deleted") @PathVariable("channelId") Long channelId) throws ChannelNotFoundException {
         if(channelRepository.existsById(channelId)) {
             channelRepository.deleteById(channelId);
         } else {
