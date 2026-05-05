@@ -14,7 +14,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.Min;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @Tag(name = "PeerTube Channel", description = "Channel management in PeerTube")
@@ -55,6 +55,7 @@ public class PeertubeController {
             @ApiResponse(responseCode = "400", content = { @Content(schema = @Schema())}),
             @ApiResponse(responseCode = "404", content = { @Content(schema = @Schema())})
     })
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/{channelName}")
     public VM_Channel postChannel(@Parameter(description = "Name of the PeerTube channel to be inserted into VideoMiner") @PathVariable String channelName,
                                   @RequestParam(name = "maxVideos", defaultValue = "10") @Min(0) Integer maxVideos,
