@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
@@ -26,8 +27,10 @@ public class CommentService {
                 + "?fields=id,title,description,created_time,tags";
         Video video = restTemplate.getForObject(uri, Video.class);
 
-        assert video != null;
-        List<String> tags = video.getTags();
+        List<String> tags = new ArrayList<>();
+        if (video != null) {
+            tags = video.getTags();
+        }
         List<Comment> comments;
 
         if(tags != null) {
