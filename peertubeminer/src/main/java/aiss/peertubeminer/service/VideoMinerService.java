@@ -1,6 +1,6 @@
-package aiss.dailymotionminer.service;
+package aiss.peertubeminer.service;
 
-import aiss.dailymotionminer.model.videominer.VM_Channel;
+import aiss.peertubeminer.model.videominer.VM_Channel;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 

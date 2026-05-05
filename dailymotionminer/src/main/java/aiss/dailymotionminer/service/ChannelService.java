@@ -24,13 +24,13 @@ public class ChannelService {
         return restTemplate.getForObject(uri, Channel.class);
     }
 
-    public Channel getChannelFull(String name, Integer maxVideos, Integer maxComments) {
+    public Channel getChannelWithVideos(String name, Integer maxVideos, Integer maxComments) {
         Channel channel = getChannel(name);
         List<Video> videos = new ArrayList<>();
 
         for (Video v : videoService.getVideosFromChannel(name, maxVideos)) {
             videos.add(
-                    videoService.getVideoFull(v, maxComments)
+                    videoService.getVideoWithCommentsAndCaptions(v, maxComments)
             );
         }
         channel.setVideos(videos);

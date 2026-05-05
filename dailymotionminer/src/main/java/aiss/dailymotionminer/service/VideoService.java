@@ -53,7 +53,7 @@ public class VideoService {
         return videos;
     }
 
-    public Video getVideoFull(Video video, Integer maxComments) {
+    public Video getVideoWithCommentsAndCaptions(Video video, Integer maxComments) {
         String videoId = video.getId();
         List<Comment> comments = commentService.getCommentsFromVideo(videoId, maxComments);
         video.setComments(comments);

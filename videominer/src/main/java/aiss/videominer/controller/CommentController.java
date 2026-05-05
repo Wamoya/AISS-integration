@@ -24,7 +24,7 @@ import java.util.Optional;
 
 @Tag(name = "Comment", description = "Comment management API")
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/videominer/v1")
 public class CommentController {
 
     @Autowired
@@ -34,7 +34,7 @@ public class CommentController {
     VideoRepository videoRepository;
 
 
-    // GET http://localhost:8080/apipath/comments
+    // GET http://localhost:8080/api/videominer/v1/comments
     @Operation(
             summary = "Retrieve a list of comments",
             description = "Get a list of all available comments",
@@ -47,7 +47,7 @@ public class CommentController {
         return commentRepository.findAll();
     }
 
-    // GET http://localhost:8080/apipath/videos/{videoId}/comments
+    // GET http://localhost:8080/api/videominer/v1/videos/{videoId}/comments
     @Operation(
             summary = "Retrieve all comments of a video using its ID",
             description = "Get all available comments of a video by specifying its ID",
@@ -57,7 +57,7 @@ public class CommentController {
             @ApiResponse(responseCode = "404", content = {@Content(schema = @Schema())})
     })
     @GetMapping("videos/{videoId}/comments")
-    public List<Comment> getAllCommentsFromVideo(@Parameter(description = "Video ID to which the comments belong") @PathVariable("videoId") Long videoId) throws VideoNotFoundException {
+    public List<Comment> getCommentsFromVideo(@Parameter(description = "Video ID to which the comments belong") @PathVariable("videoId") Long videoId) throws VideoNotFoundException {
         Optional<Video> video = videoRepository.findById(videoId);
         if (!video.isPresent()) {
             throw new VideoNotFoundException();
@@ -65,7 +65,7 @@ public class CommentController {
         return video.get().getComments();
     }
 
-    // GET http://localhost:8080/apipath/comments/{commentId}
+    // GET http://localhost:8080/api/videominer/v1/comments/{commentId}
     @Operation(
             summary = "Retrieve a comment by ID",
             description = "Get a Caption object by specifying its ID",
@@ -83,7 +83,7 @@ public class CommentController {
         return comment.get();
     }
 
-    // POST http://localhost:8080/apipath/videos/{videoId}/comments
+    // POST http://localhost:8080/api/videominer/v1/videos/{videoId}/comments
     @Operation(
             summary = "Insert a comment in a video",
             description = "Add a comment whose data is passed in the body of the request in JSON format to a video by specifying its ID",
@@ -106,7 +106,7 @@ public class CommentController {
         return commentRepository.save(comment);
     }
 
-    // PUT http://localhost:8080/apipath/comments/{commentId}
+    // PUT http://localhost:8080/api/videominer/v1/comments/{commentId}
     @Operation(
             summary = "Update a comment",
             description = "Update a comment whose data is passed in the body of the request in JSON format by specifying its ID",
@@ -131,7 +131,7 @@ public class CommentController {
         commentRepository.save(_comment);
     }
 
-    // DELETE http://localhost:8080/apipath/comments/{commentId}
+    // DELETE http://localhost:8080/api/videominer/v1/comments/{commentId}
     @Operation(
             summary = "Delete a comment",
             description = "Delete a comment by specifying its ID",

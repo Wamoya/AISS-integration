@@ -10,10 +10,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import io.swagger.v3.oas.annotations.tags.Tags;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,12 +20,12 @@ import java.util.Optional;
 
 @Tag(name = "Channel", description = "Channel management API")
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/videominer/v1")
 public class ChannelController {
     @Autowired
     ChannelRepository channelRepository;
 
-    // GET http://localhost:8080/apipath/channels
+    // GET http://localhost:8080/api/videominer/v1/channels
     @Operation(
             summary = "Retrieve a list of channels",
             description = "Get a list of available channels",
@@ -40,7 +38,7 @@ public class ChannelController {
         return channelRepository.findAll();
     }
 
-    // GET http://localhost:8080/apipath/channels/{channelId}
+    // GET http://localhost:8080/api/videominer/v1/channels/{channelId}
     @Operation(
             summary = "Retrieve a channel by it's ID",
             description = "Get a channel by specifying it's ID",
@@ -58,7 +56,7 @@ public class ChannelController {
         return channel.get();
     }
 
-    // POST http://localhost:8080/apipath/channels
+    // POST http://localhost:8080/api/videominer/v1/channels
     @Operation(
             summary = "Insert a channel",
             description = "Add a channel whose data is passed in the body of the request in JSON format by specifying it's ID",
@@ -71,10 +69,16 @@ public class ChannelController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/channels")
     public Channel create(@Valid @RequestBody Channel channel) {
-        return channelRepository.save(channel);
+        Channel savedChannel = new Channel(
+                channel.getName(),
+                channel.getDescription(),
+                channel.getCreatedTime()
+        );
+        savedChannel.setVideos(channel.getVideos());
+        return channelRepository.save(savedChannel);
     }
 
-    // PUT http://localhost:8080/apipath/channels/{channelId}
+    // PUT http://localhost:8080/api/videominer/v1/channels/{channelId}
     @Operation(
             summary = "Update a channel",
             description = "Update a channel whose data is passed in the body of the request in JSON format by specifying it's ID",
@@ -85,7 +89,7 @@ public class ChannelController {
             @ApiResponse(responseCode = "404", content = {@Content(schema = @Schema())})
     })
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @PutMapping("/channels/{channelId")
+    @PutMapping("/channels/{channelId}")
     public void update(@Parameter(description = "Update a channel") @PathVariable("channelId")  Long channelId,
                        @Valid @RequestBody Channel updatedChannel) throws ChannelNotFoundException {
         Optional<Channel> channelData = channelRepository.findById(channelId);
@@ -100,7 +104,7 @@ public class ChannelController {
         channelRepository.save(_channel);
     }
 
-    // DELETE http://localhost:8080/apipath/channels/{channelId}
+    // DELETE http://localhost:8080/api/videominer/v1/channels/{channelId}
     @Operation(
             summary = "",
             description = "",

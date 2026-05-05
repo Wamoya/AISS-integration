@@ -3,13 +3,13 @@ package aiss.peertubeminer.model.videominer;
 public class VM_Caption {
 
     private String id;
-    private String language;
     private String link;
+    private String language;
 
-    public VM_Caption(String id, String language, String link) {
+    public VM_Caption(String id, String link, String language) {
         this.id = id;
-        this.language = language;
         this.link = link;
+        this.language = language;
     }
 
     public String getId() {

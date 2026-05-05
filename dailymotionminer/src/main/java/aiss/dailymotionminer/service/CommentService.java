@@ -34,7 +34,7 @@ public class CommentService {
             comments = tags.stream()
                     .limit(maxComments)
                     .map(tag -> new Comment(
-                            UUID.randomUUID().toString(), //Random id assignment
+                            null, //id
                             tag, //Video tag
                             video.getCreatedTime().toString() //Video time stamp string
                     ))

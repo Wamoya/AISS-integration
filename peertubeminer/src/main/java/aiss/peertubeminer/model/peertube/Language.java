@@ -1,7 +1,6 @@
 
 package aiss.peertubeminer.model.peertube;
 
-import javax.annotation.processing.Generated;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -11,7 +10,6 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "id",
     "label"
 })
-@Generated("jsonschema2pojo")
 public class Language {
 
     @JsonProperty("id")

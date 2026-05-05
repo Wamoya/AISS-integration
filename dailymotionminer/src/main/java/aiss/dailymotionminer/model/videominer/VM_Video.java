@@ -14,8 +14,6 @@ public class VM_Video {
     private String description;
     @JsonProperty("releaseTime")
     private String releaseTime;
-    @JsonProperty("channel")
-    private VM_Channel channel;
     @JsonProperty("user")
     private VM_User user;
     @JsonProperty("comments")
@@ -23,12 +21,11 @@ public class VM_Video {
     @JsonProperty("captions")
     private List<VM_Caption> captions;
 
-    public VM_Video(String id, String name, String description, String releaseTime, VM_Channel channel, VM_User user, List<VM_Comment> comments, List<VM_Caption> captions) {
+    public VM_Video(String id, String name, String description, String releaseTime, VM_User user, List<VM_Comment> comments, List<VM_Caption> captions) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.releaseTime = releaseTime;
-        this.channel = channel;
         this.user = user;
         this.comments = comments;
         this.captions = captions;
@@ -62,9 +59,6 @@ public class VM_Video {
         this.releaseTime = releaseTime;
     }
 
-    public VM_Channel getChannel() { return channel; }
-    public void setChannel(VM_Channel channel) { this.channel = channel; }
-
     public VM_User getUser() { return user; }
     public void SetUser(VM_User user) { this.user = user; }
 
@@ -89,6 +83,7 @@ public class VM_Video {
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", releaseTime='" + releaseTime + '\'' +
+                ", user=" + user +
                 ", comments=" + comments +
                 ", captions=" + captions +
                 '}';
