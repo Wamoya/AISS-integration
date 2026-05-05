@@ -94,7 +94,8 @@ public class Channel {
         sb.append("description=").append(description != null ? description : "<null>").append(", ");
         sb.append("createdTime=").append(createdTime != null ? createdTime : "<null>").append(", ");
         sb.append("url=").append(url != null ? url : "<null>").append(", ");
-        sb.append("avatar240Url=").append(avatar240url != null ? avatar240url : "<null>");
+        sb.append("avatar240Url=").append(avatar240url != null ? avatar240url : "<null>").append(", ");
+        sb.append("videos=").append(videos != null ? videos : "<null>");
         sb.append(']');
 
         return sb.toString();
