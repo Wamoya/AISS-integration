@@ -26,7 +26,7 @@ public class VideoService {
     String BASE_URI = "https://api.dailymotion.com";
 
     public List<Video> getVideosFromChannel(String profileId, Integer maxVideos, Integer maxPages) {
-        if (maxVideos == 0) return Collections.emptyList(); //To avoid unnecessary API requests.
+        if (maxVideos == 0 || maxPages == 0) return Collections.emptyList(); //To avoid unnecessary API requests.
 
         int remainingVideos = maxVideos;
         int page = 1;
