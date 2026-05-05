@@ -41,8 +41,8 @@ public class DailymotionController {
     @GetMapping("/{channelName}")
     public VM_Channel getChannel(@Parameter(description = "Name of the DailyMotion channel to be searched") @PathVariable String channelName,
                                  @RequestParam(name = "maxVideos", defaultValue = "10") @Min(0) @Max(1000) Integer maxVideos, //The Dailymotion API allows for a maximum of 10 pages with a maximum 100 videos per page, so our API will be able to request at most 1000 videos from a channel.
-                                 @RequestParam(name = "maxComments", defaultValue = "2") @Min(0) Integer maxComments) {
-        Channel channel = channelService.getChannelWithVideos(channelName, maxVideos, maxComments);
+                                 @RequestParam(name = "maxPages", defaultValue = "2") @Min(0) Integer maxPages) {
+        Channel channel = channelService.getChannelWithVideos(channelName, maxVideos, maxPages);
         return Transformer.toVMChannel(channel);
     }
 
