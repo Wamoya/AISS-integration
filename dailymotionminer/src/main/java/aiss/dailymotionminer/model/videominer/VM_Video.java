@@ -60,7 +60,7 @@ public class VM_Video {
     }
 
     public VM_User getUser() { return user; }
-    public void SetUser(VM_User user) { this.user = user; }
+    public void setUser(VM_User user) { this.user = user; }
 
     public List<VM_Comment> getComments() {
         return comments;
