@@ -63,10 +63,10 @@ public class VideoService {
     }
 
     public Video getVideoWithCommentsAndCaptions(Video video, Integer maxComments) {
-        List<Comment> comments = commentService.getCommentsFromVideo(video, maxComments);
+        List<Comment> comments = commentService.getCommentsFromVideo(video.getId(), maxComments);
         video.setComments(comments);
 
-        List<Caption> captions = captionService.getCaptionsFromVideo(video);
+        List<Caption> captions = captionService.getCaptionsFromVideo(video.getId());
         video.setCaptions(captions);
 
         return video;

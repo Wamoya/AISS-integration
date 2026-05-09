@@ -1,15 +1,14 @@
-package aiss.dailymotionminer.service;
+package aiss.peertubeminer.service;
 
-import aiss.dailymotionminer.model.dailymotion.Comment;
+import aiss.peertubeminer.model.peertube.Comment;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.util.List;
 
-
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 @SpringBootTest
 public class CommentServiceTest {
@@ -18,10 +17,10 @@ public class CommentServiceTest {
     CommentService commentService;
 
     @Test
-    @DisplayName("Get video comments")
+    @DisplayName("Get comments from a video")
     void getComments() {
-        List<Comment> comments = commentService.getCommentsFromVideo("xa8pdrm");
-        assertFalse(comments.isEmpty(), "The list of comments (tags) cannot be empty");
+        List<Comment> comments = commentService.getCommentsFromVideo("wsa7yQiUSVnw9HTwba1KiN", 5);
+        assertFalse(comments.isEmpty(), "The list of comments cannot be empty");
         System.out.println(comments);
     }
 }

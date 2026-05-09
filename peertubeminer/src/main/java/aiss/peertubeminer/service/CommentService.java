@@ -2,7 +2,6 @@ package aiss.peertubeminer.service;
 
 import aiss.peertubeminer.model.peertube.Comment;
 import aiss.peertubeminer.model.peertube.Comment_Data;
-import aiss.peertubeminer.model.peertube.Video;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -20,10 +19,9 @@ public class CommentService {
 
     String BASE_URI = "https://peertube.tv/api/v1";
 
-    public List<Comment> getCommentsFromVideo(Video video, Integer maxComments) {
-        if (maxComments == 0 || video.getNumComments() == 0) return Collections.emptyList(); //To avoid unnecessary API requests.
+    public List<Comment> getCommentsFromVideo(String videoId, Integer maxComments) {
+        if (maxComments == 0) return Collections.emptyList(); //To avoid unnecessary API requests.
 
-        String videoId = video.getId();
         int remaining = maxComments;
         List<Comment> comments = new ArrayList<>();
         boolean possible = true;

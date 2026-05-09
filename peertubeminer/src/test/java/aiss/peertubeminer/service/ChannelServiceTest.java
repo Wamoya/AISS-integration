@@ -1,33 +1,33 @@
-package aiss.dailymotionminer.service;
+package aiss.peertubeminer.service;
 
-import aiss.dailymotionminer.model.dailymotion.Channel;
+import aiss.peertubeminer.model.peertube.Channel;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
-class ChannelServiceTest {
+public class ChannelServiceTest {
 
     @Autowired
     ChannelService channelService;
 
-    String channelName = "redbull";
+    String channelHandle = "transport_evolved_take_2";
 
     @Test
     @DisplayName("Get basic information of a channel")
     void getChannel() {
-        Channel channel = channelService.getChannel(channelName);
-        assertNotNull(channel, "The channel cannot not be null");
+        Channel channel = channelService.getChannel(channelHandle);
+        assertNotNull(channel, "The channel cannot be null");
         System.out.println(channel);
     }
 
     @Test
     @DisplayName("Get complete information of a channel (including videos)")
     void getChannelWithVideos() {
-        Channel channel = channelService.getChannelWithVideos(channelName, 2, 2);
+        Channel channel = channelService.getChannelWithVideos(channelHandle, 5, 5);
         assertNotNull(channel, "The channel cannot be null");
         System.out.println(channel);
     }

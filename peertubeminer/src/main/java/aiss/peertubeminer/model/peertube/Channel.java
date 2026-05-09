@@ -93,6 +93,9 @@ public class Channel {
         sb.append('=');
         sb.append(((this.createdAt == null)?"<null>":this.createdAt));
         sb.append(',');
+        sb.append("videos");
+        sb.append('=');
+        sb.append(((this.videos == null)?"<null>":this.videos));
         if (sb.charAt((sb.length()- 1)) == ',') {
             sb.setCharAt((sb.length()- 1), ']');
         } else {

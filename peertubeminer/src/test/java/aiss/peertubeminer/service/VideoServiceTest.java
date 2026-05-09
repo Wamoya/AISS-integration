@@ -12,24 +12,15 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 @SpringBootTest
 class VideoServiceTest {
-    String test_ChannelHandle = "transport_evolved_take_2";
 
     @Autowired
-    VideoService service;
+    VideoService videoService;
 
     @Test
-    @DisplayName("Get videos from a video channel. (Default values)")
-    void findVideosFromChannelDefault() {
-        List<Video> videos = service.getVideosFromChannel(test_ChannelHandle);
-        assertFalse(videos.isEmpty());
-        System.out.println(videos);
-    }
-
-    @Test
-    @DisplayName("Get videos from a video channel. (maxVideos=2&maxComments=10)")
-    void findVideosFromChannelParams() {
-        List<Video> videos = service.getVideosFromChannel(test_ChannelHandle, 2, 10);
-        assertFalse(videos.isEmpty());
+    @DisplayName("Get videos from a channel")
+    void getVideos() {
+        List<Video> videos = videoService.getVideosFromChannel("transport_evolved_take_2", 100);
+        assertFalse(videos.isEmpty(), "The list of videos cannot be empty");
         System.out.println(videos);
     }
 }

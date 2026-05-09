@@ -17,8 +17,8 @@ public class CaptionService {
 
     String BASE_URI = "https://peertube.tv/api/v1";
 
-    public List<Caption> getCaptionsFromVideo(Video video) {
-        String uri = BASE_URI + "/videos/" + video.getId() + "/captions";
+    public List<Caption> getCaptionsFromVideo(String videoId) {
+        String uri = BASE_URI + "/videos/" + videoId + "/captions";
         ResponseEntity<Caption_Data> response = restTemplate.getForEntity(uri, Caption_Data.class);
 
         List<Caption> captions = new ArrayList<>();
