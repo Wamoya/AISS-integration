@@ -1,8 +1,6 @@
 package aiss.videominer.controller;
 
-import aiss.videominer.exception.CommentNotFoundException;
 import aiss.videominer.exception.VideoNotFoundException;
-import aiss.videominer.model.Comment;
 import aiss.videominer.model.Video;
 import aiss.videominer.repository.VideoRepository;
 import io.swagger.v3.oas.annotations.Operation;
@@ -12,11 +10,10 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -58,5 +55,69 @@ public class VideoController {
             throw new VideoNotFoundException();
         }
         return video.get();
+    }
+
+    // POST http://localhost:8080/api/videominer/v1/videos
+    @Operation(
+            summary = "Insert a video",
+            description = "Add a video whose data is passed in the body of the request in JSON format",
+            tags = {"POST"})
+    @ApiResponses({
+            @ApiResponse(responseCode = "201", content = {@Content(schema = @Schema(implementation = Video.class), mediaType = "application/json")}),
+            @ApiResponse(responseCode = "400", content = {@Content(schema = @Schema())}),
+            @ApiResponse(responseCode = "404", content = {@Content(schema = @Schema())})
+    })
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("/videos")
+    public Video create(@Valid @RequestBody Video video) {
+        return videoRepository.save(video);
+    }
+
+    // PUT http://localhost:8080/api/videominer/v1/videos/{videoId}
+    @Operation(
+            summary = "Update a video",
+            description = "Update a video whose data is passed in the body of the request in JSON format by specifying its ID",
+            tags = {"PUT"})
+    @ApiResponses({
+            @ApiResponse(responseCode = "204", content = {@Content(schema = @Schema(implementation = Video.class), mediaType = "application/json")}),
+            @ApiResponse(responseCode = "400", content = {@Content(schema = @Schema())}),
+            @ApiResponse(responseCode = "404", content = {@Content(schema = @Schema())})
+    })
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PutMapping("/videos/{videoId}")
+    public void update(@Parameter(description = "ID of the video to be updated") @PathVariable("videoId") Long videoId,
+                       @Valid @RequestBody Video updatedVideo) throws VideoNotFoundException {
+        Optional<Video> videoData = videoRepository.findById(videoId);
+        if(!videoData.isPresent()) {
+            throw new VideoNotFoundException();
+        }
+        Video _video = videoData.get();
+        _video.setName(updatedVideo.getName());
+        _video.setDescription(updatedVideo.getDescription());
+        _video.setReleaseTime(updatedVideo.getReleaseTime());
+        _video.setUser(updatedVideo.getUser());
+        _video.setComments(updatedVideo.getComments());
+        _video.setCaptions(updatedVideo.getCaptions());
+        videoRepository.save(_video);
+    }
+
+    // DELETE http://localhost:8080/api/videominer/v1/videos/{videoId}
+    @Operation(
+            summary = "Delete a video",
+            description = "Delete a video by specifying its ID",
+            tags = {"DELETE"})
+    @ApiResponses({
+            @ApiResponse(responseCode = "204", content = {@Content(schema = @Schema(implementation = Video.class), mediaType = "application/json")}),
+            @ApiResponse(responseCode = "400", content = {@Content(schema = @Schema())}),
+            @ApiResponse(responseCode = "404", content = {@Content(schema = @Schema())})
+    })
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/videos/{videoId}")
+    public void delete(@Parameter(description = "ID of the video to be deleted") @PathVariable("videoId") Long videoId) throws VideoNotFoundException {
+        if(videoRepository.existsById(videoId)) {
+            videoRepository.deleteById(videoId);
+        } else {
+            throw new VideoNotFoundException();
+        }
     }
 }

@@ -91,7 +91,7 @@ public class CaptionController {
             @ApiResponse(responseCode = "404", content = {@Content(schema = @Schema())})
     })
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("/video/{videoId}/captions")
+    @PostMapping("/videos/{videoId}/captions")
     public Caption create(@Parameter(description = "Video ID where the caption will be created") @PathVariable("videoId") Long videoId,
                           @Valid @RequestBody Caption caption) throws VideoNotFoundException {
         Optional<Video> video = videoRepository.findById(videoId);
@@ -139,7 +139,7 @@ public class CaptionController {
             @ApiResponse(responseCode = "404", content = {@Content(schema = @Schema())})
     })
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @DeleteMapping("/caption/{captionId}")
+    @DeleteMapping("/captions/{captionId}")
     public void delete(@Parameter(description = "ID of the caption to be deleted") @PathVariable("captionId") Long captionId) {
         if(captionRepository.existsById(captionId)) {
             captionRepository.deleteById(captionId);

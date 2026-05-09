@@ -94,7 +94,7 @@ public class CommentController {
             @ApiResponse(responseCode = "404", content = {@Content(schema = @Schema())})
     })
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("/video/{videoId}/comments")
+    @PostMapping("/videos/{videoId}/comments")
     public Comment create(@Parameter(description = "Video ID where the comment will be created") @PathVariable("videoId") Long videoId,
                           @Valid @RequestBody Comment comment) throws VideoNotFoundException {
         Optional<Video> video = videoRepository.findById(videoId);
@@ -142,7 +142,7 @@ public class CommentController {
             @ApiResponse(responseCode = "404", content = {@Content(schema = @Schema())})
     })
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @DeleteMapping("/comment/{commentId}")
+    @DeleteMapping("/comments/{commentId}")
     public void delete(@Parameter(description = "ID of the comment to be deleted") @PathVariable("commentId") Long commentId) {
         if (commentRepository.existsById(commentId)) {
             commentRepository.deleteById(commentId);

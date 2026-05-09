@@ -108,7 +108,8 @@ public class Video {
     }
 
     public void setComments(List<Comment> comments) {
-        this.comments = comments;
+        this.comments.clear();
+        this.comments.addAll(comments);
     }
 
     public List<Caption> getCaptions() {
@@ -116,7 +117,8 @@ public class Video {
     }
 
     public void setCaptions(List<Caption> captions) {
-        this.captions = captions;
+        this.captions.clear();
+        this.captions.addAll(captions);
     }
 
     @Override
