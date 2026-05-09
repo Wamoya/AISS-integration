@@ -79,7 +79,7 @@ public class User {
         sb.append('=');
         sb.append(((this.url == null)?"<null>":this.url));
         sb.append(',');
-        sb.append("avatar240Url");
+        sb.append(" avatar240Url");
         sb.append('=');
         sb.append(((this.avatar240Url == null)?"<null>":this.avatar240Url));
         sb.append(',');
