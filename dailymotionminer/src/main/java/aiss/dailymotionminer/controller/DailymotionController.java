@@ -40,8 +40,8 @@ public class DailymotionController {
     })
     @GetMapping("/{channelName}")
     public VM_Channel getChannel(@Parameter(description = "Name of the DailyMotion channel to be searched") @PathVariable String channelName,
-                                 @RequestParam(name = "maxVideos", defaultValue = "10") @Min(1) @Max(1000) Integer maxVideos, //The Dailymotion API allows for a maximum of 10 pages with a maximum 100 videos per page, so our API will be able to request at most 1000 videos from a channel.
-                                 @RequestParam(name = "maxPages", defaultValue = "2") @Min(1) @Max(10) Integer maxPages) {
+                                 @Parameter(description = "Maximum number of videos to be searched") @RequestParam(name = "maxVideos", defaultValue = "10") @Min(1) @Max(1000) Integer maxVideos, //The Dailymotion API allows for a maximum of 10 pages with a maximum 100 videos per page, so our API will be able to request at most 1000 videos from a channel.
+                                 @Parameter(description = "Maximum number of pages to be searched") @RequestParam(name = "maxPages", defaultValue = "2") @Min(1) @Max(10) Integer maxPages) {
         Channel channel = channelService.getChannelWithVideos(channelName, maxVideos, maxPages); //The Dailymotion API allows for a maximum of 10 pages with a maximum 100 videos per page, so our API will be able to request at most 10 pages from a channel.
         return Transformer.toVMChannel(channel);
     }
@@ -59,8 +59,8 @@ public class DailymotionController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/{channelName}")
     public VM_Channel postChannel(@Parameter(description = "Name of the DailyMotion channel to be inserted into VideoMiner") @PathVariable String channelName,
-                                  @RequestParam(name = "maxVideos", defaultValue = "10") @Min(1) @Max(1000) Integer maxVideos,
-                                  @RequestParam(name = "maxPages", defaultValue = "2") @Min(1) @Max(10) Integer maxPages) {
+                                  @Parameter(description = "Maximum number of videos to be searched") @RequestParam(name = "maxVideos", defaultValue = "10") @Min(1) @Max(1000) Integer maxVideos,
+                                  @Parameter(description = "Maximum number of pages to be searched") @RequestParam(name = "maxPages", defaultValue = "2") @Min(1) @Max(10) Integer maxPages) {
         Channel channel = channelService.getChannelWithVideos(channelName, maxVideos, maxPages);
         VM_Channel vm_channel = Transformer.toVMChannel(channel);
         return videoMinerService.postChannel(vm_channel);

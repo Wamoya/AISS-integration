@@ -39,8 +39,8 @@ public class PeertubeController {
     })
     @GetMapping("/{channelName}")
     public VM_Channel getChannel(@Parameter(description = "Name of the PeerTube channel to be searched") @PathVariable String channelName,
-                                 @RequestParam(name = "maxVideos", defaultValue = "10") @Min(0) Integer maxVideos,
-                                 @RequestParam(name = "maxComments", defaultValue = "2") @Min(0) Integer maxComments) {
+                                 @Parameter(description = "Maximum number of videos to be searched") @RequestParam(name = "maxVideos", defaultValue = "10") @Min(0) Integer maxVideos,
+                                 @Parameter(description = "Maximum number of comments to be searched") @RequestParam(name = "maxComments", defaultValue = "2") @Min(0) Integer maxComments) {
         Channel channel = channelService.getChannelWithVideos(channelName, maxVideos, maxComments);
         return Transformer.toVMChannel(channel);
     }
@@ -58,8 +58,8 @@ public class PeertubeController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/{channelName}")
     public VM_Channel postChannel(@Parameter(description = "Name of the PeerTube channel to be inserted into VideoMiner") @PathVariable String channelName,
-                                  @RequestParam(name = "maxVideos", defaultValue = "10") @Min(0) Integer maxVideos,
-                                  @RequestParam(name = "maxComments", defaultValue = "2") @Min(0) Integer maxComments) {
+                                  @Parameter(description = "Maximum number of videos to be searched") @RequestParam(name = "maxVideos", defaultValue = "10") @Min(0) Integer maxVideos,
+                                  @Parameter(description = "Maximum number of comments to be searched") @RequestParam(name = "maxComments", defaultValue = "2") @Min(0) Integer maxComments) {
         Channel channel = channelService.getChannelWithVideos(channelName, maxVideos, maxComments);
         VM_Channel vm_channel = Transformer.toVMChannel(channel);
         return videoMinerService.postChannel(vm_channel);
