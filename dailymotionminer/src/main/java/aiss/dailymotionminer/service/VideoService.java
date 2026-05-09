@@ -41,14 +41,16 @@ public class VideoService {
                     + "/videos?fields=id,title,description,created_time,tags&limit=" + limit + "&page=" + page;
             response = restTemplate.getForEntity(uri, Video_Data.class);
 
-            if (response.getBody() != null) {
-                videos.addAll(response.getBody().getList());
+            if (response.getBody() == null) {
+                break;
             }
+            List<Video> newVideos = response.getBody().getList();
+            videos.addAll(newVideos);
 
-            remainingVideos -= limit; //Subtract obtained videos.
+            remainingVideos -= newVideos.size();
             page++;
 
-        } while(response.getBody().getHasMore() && (videos.size() < maxVideos) && page < maxPages);
+        } while(response.getBody().getHasMore() && (videos.size() < maxVideos) && page <= maxPages);
 
         return videos;
     }

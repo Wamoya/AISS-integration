@@ -23,4 +23,13 @@ public class VideoServiceTest {
         assertFalse(videos.isEmpty(), "The list of videos cannot be empty");
         System.out.println(videos);
     }
+
+    @Test
+    @DisplayName("Get videos from a channel using pagination")
+    void getVideosUsingPagination() {
+        List<Video> videos = videoService.getVideosFromChannel("elmundo", 201, 4);
+        assertFalse(videos.isEmpty(), "The list of videos cannot be empty");
+        assertFalse(videos.size() != 201, "Should return 201 videos.");
+        System.out.println(videos.size());
+    }
 }
