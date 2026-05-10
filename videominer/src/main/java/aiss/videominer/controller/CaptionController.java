@@ -83,7 +83,7 @@ public class CaptionController {
     // POST http://localhost:8080/api/videominer/v1/videos/{videoId}/captions
     @Operation(
             summary = "Insert a caption in a video",
-            description = "Add a caption whose data is passed in the body of the request in JSON format to a video by specifying its ID",
+            description = "Add a caption whose data is passed in the body of the request in JSON format to a video",
             tags = {"POST"})
     @ApiResponses({
             @ApiResponse(responseCode = "201", content = {@Content(schema = @Schema(implementation = Caption.class), mediaType = "application/json")}),

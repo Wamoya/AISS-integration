@@ -3,6 +3,7 @@ package aiss.videominer.controller;
 import aiss.videominer.exception.UserNotFoundException;
 import aiss.videominer.model.User;
 import aiss.videominer.repository.UserRepository;
+import aiss.videominer.repository.VideoRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -38,8 +39,6 @@ public class UserController {
         return userRepository.findAll();
     }
 
-    // TODO: implement GET that gives User from video ID?
-
     // GET http://localhost:8080/api/videominer/v1/users/{userId}
     @Operation(
             summary = "Retrieve a user by ID",
@@ -52,26 +51,10 @@ public class UserController {
     @GetMapping("/users/{userId}")
     public User findOne(@Parameter(description = "ID of the user to be searched") @PathVariable("userId") Long userId) throws UserNotFoundException {
         Optional<User> user = userRepository.findById(userId);
-        if(!user.isPresent()) {
+        if (!user.isPresent()) {
             throw new UserNotFoundException();
         }
         return user.get();
-    }
-
-    // POST http://localhost:8080/api/videominer/v1/users
-    @Operation(
-            summary = "Insert a user",
-            description = "Add a user whose data is passed in the body of the request in JSON format by specifying its ID",
-            tags = {"POST"})
-    @ApiResponses({
-            @ApiResponse(responseCode = "201", content = {@Content(schema = @Schema(implementation = User.class), mediaType = "application/json")}),
-            @ApiResponse(responseCode = "400", content = {@Content(schema = @Schema())}),
-            @ApiResponse(responseCode = "404", content = {@Content(schema = @Schema())})
-    })
-    @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("/users")
-    public User create(@Valid @RequestBody User user) {
-        return userRepository.save(user);
     }
 
     // PUT http://localhost:8080/api/videominer/v1/users/{userId}
@@ -89,7 +72,7 @@ public class UserController {
     public void update(@Parameter(description = "ID of the user to be updated") @PathVariable("userId") Long userId,
                        @Valid @RequestBody User updatedUser) throws UserNotFoundException {
         Optional<User> userData = userRepository.findById(userId);
-        if(!userData.isPresent()) {
+        if (!userData.isPresent()) {
             throw new UserNotFoundException();
         }
         User _user = userData.get();
@@ -98,25 +81,4 @@ public class UserController {
         _user.setPicture_link(updatedUser.getPicture_link());
         userRepository.save(_user);
     }
-
-    // DELETE http://localhost:8080/api/videominer/v1/users/{userId}
-    @Operation(
-            summary = "Delete a user",
-            description = "Delete a user by specifying its ID",
-            tags = {"DELETE"})
-    @ApiResponses({
-            @ApiResponse(responseCode = "204", content = {@Content(schema = @Schema(implementation = User.class), mediaType = "application/json")}),
-            @ApiResponse(responseCode = "400", content = {@Content(schema = @Schema())}),
-            @ApiResponse(responseCode = "404", content = {@Content(schema = @Schema())})
-    })
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    @DeleteMapping("/users/{userId}")
-    public void delete(@Parameter(description = "ID of the user to be deleted") @PathVariable("userId") Long userId) throws UserNotFoundException {
-        if(userRepository.existsById(userId)) {
-            userRepository.deleteById(userId);
-        } else {
-            throw new UserNotFoundException();
-        }
-    }
-
 }

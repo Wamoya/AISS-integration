@@ -59,7 +59,7 @@ public class ChannelController {
     // POST http://localhost:8080/api/videominer/v1/channels
     @Operation(
             summary = "Insert a channel",
-            description = "Add a channel whose data is passed in the body of the request in JSON format by specifying its ID",
+            description = "Add a channel whose data is passed in the body of the request in JSON format",
             tags = {"POST"})
     @ApiResponses({
             @ApiResponse(responseCode = "201", content = {@Content(schema = @Schema(implementation = Channel.class), mediaType = "application/json")}),

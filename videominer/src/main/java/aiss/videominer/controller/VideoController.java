@@ -1,7 +1,10 @@
 package aiss.videominer.controller;
 
+import aiss.videominer.exception.ChannelNotFoundException;
 import aiss.videominer.exception.VideoNotFoundException;
+import aiss.videominer.model.Channel;
 import aiss.videominer.model.Video;
+import aiss.videominer.repository.ChannelRepository;
 import aiss.videominer.repository.VideoRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -25,6 +28,8 @@ public class VideoController {
 
     @Autowired
     VideoRepository videoRepository;
+    @Autowired
+    ChannelRepository channelRepository;
 
     // GET http://localhost:8080/api/videominer/v1/videos
     @Operation(
@@ -57,9 +62,9 @@ public class VideoController {
         return video.get();
     }
 
-    // POST http://localhost:8080/api/videominer/v1/videos
+    // POST http://localhost:8080/api/videominer/v1/channels/{channelId}/videos
     @Operation(
-            summary = "Insert a video",
+            summary = "Insert a video in a channel",
             description = "Add a video whose data is passed in the body of the request in JSON format",
             tags = {"POST"})
     @ApiResponses({
@@ -68,8 +73,15 @@ public class VideoController {
             @ApiResponse(responseCode = "404", content = {@Content(schema = @Schema())})
     })
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("/videos")
-    public Video create(@Valid @RequestBody Video video) {
+    @PostMapping("/channels/{channelId}/videos")
+    public Video create(@Parameter(description = "Channel ID where the video will be created") @PathVariable("channelId") Long channelId,
+                        @Valid @RequestBody Video video) throws ChannelNotFoundException {
+        Optional<Channel> channel = channelRepository.findById(channelId);
+        if (!channel.isPresent()) {
+            throw new ChannelNotFoundException();
+        }
+
+        channel.get().getVideos().add(video);
         return videoRepository.save(video);
     }
 

@@ -86,7 +86,7 @@ public class CommentController {
     // POST http://localhost:8080/api/videominer/v1/videos/{videoId}/comments
     @Operation(
             summary = "Insert a comment in a video",
-            description = "Add a comment whose data is passed in the body of the request in JSON format to a video by specifying its ID",
+            description = "Add a comment whose data is passed in the body of the request in JSON format to a video",
             tags = {"POST"})
     @ApiResponses({
             @ApiResponse(responseCode = "201", content = {@Content(schema = @Schema(implementation = Comment.class), mediaType = "application/json")}),
