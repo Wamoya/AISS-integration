@@ -8,9 +8,6 @@ import jakarta.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author Juan C. Alonso
- */
 @Entity
 @Table(name = "Video")
 public class Video {

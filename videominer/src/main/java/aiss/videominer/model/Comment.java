@@ -3,9 +3,6 @@ package aiss.videominer.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
-/**
- * @author Juan C. Alonso
- */
 @Entity
 @Table(name = "Comment")
 public class Comment {
@@ -29,12 +26,6 @@ public class Comment {
         this.text = text;
         this.createdOn = createdOn;
     }
-
-    // Possible future extension point for the data model. (See comments in ./Video.java)
-//    @JsonProperty("author")
-//    @ManyToOne(cascade = CascadeType.ALL) // One author <-> Many comments
-//    @NotNull(message = "Comment author cannot be null")
-//    private User author;
     
     public Long getId() {
         return id;
