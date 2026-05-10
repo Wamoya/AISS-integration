@@ -1,6 +1,6 @@
 # AISS - Integration project
 
-Deliverable for the AISS subject.
+Deliverable for the AISS subject. GitHub repository: https://github.com/Wamoya/AISS-integration
 
 ## Project specifications
 
