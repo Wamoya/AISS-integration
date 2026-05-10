@@ -1376,7 +1376,9 @@
                   "\r",
                   "pm.test(\"Response contains 220 videos.\", () => { pm.expect(jsonData[\"videos\"].length).to.equal(220); })"
                 ],
-                "type": "text/javascript"
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
               }
             }
           ],
@@ -1384,7 +1386,7 @@
             "method": "POST",
             "header": [],
             "url": {
-              "raw": "http://localhost:8082/api/dailymotionminer/v1/elmundo?maxVideos=220&maxPages=10",
+              "raw": "http://localhost:8082/api/dailymotionminer/v1/europarltv?maxVideos=220&maxPages=10",
               "protocol": "http",
               "host": [
                 "localhost"
@@ -1394,7 +1396,7 @@
                 "api",
                 "dailymotionminer",
                 "v1",
-                "elmundo"
+                "europarltv"
               ],
               "query": [
                 {
