@@ -1,9 +1,5 @@
 package aiss.peertubeminer.model.videominer;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.*;
-
-
 public class VM_User {
 
     private String id;
