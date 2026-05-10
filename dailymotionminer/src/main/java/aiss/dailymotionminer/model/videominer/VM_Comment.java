@@ -1,11 +1,9 @@
 package aiss.dailymotionminer.model.videominer;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.Id;
 
 public class VM_Comment {
 
-    @Id
     @JsonProperty("id")
     private String id;
 
