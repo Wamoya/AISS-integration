@@ -13,12 +13,12 @@ Deliverable for the AISS subject. GitHub repository: https://github.com/Wamoya/A
   - An **extension point**, if we finally decide that traceability is important for our project, would be to store the original ID of each object in a new column in the database.
 
 We have implemented **pagination and throttling** logic to avoid error 429 when interacting with the more restrictive Peertube API.
-  - Both miners also uses pagination logic to get all the requested resources together before sending the response back to the developer / Video Miner app.
+  - Both miners also use pagination logic to get all the requested resources together before sending the response back to the developer / Video Miner app.
 
 We have **tweaked the provided Postman test suite** for it to be compatible with our ID generation strategy, **as well as expanded it** with more tests, including but not limited to tests for the pagination and throttling logic of the miners.
 
 Also, each one of the miners comes with its own set of tests to check the correct functioning of the different methods that have been defined.
 
-#### Video Miner
+#### Proposed Video Miner data model
 
 ![Main data model](./assets/data_model-videominer.png "Main data model")
