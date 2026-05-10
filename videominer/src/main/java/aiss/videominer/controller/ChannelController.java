@@ -99,7 +99,8 @@ public class ChannelController {
         Channel _channel = channelData.get();
         _channel.setName(updatedChannel.getName());
         _channel.setDescription(updatedChannel.getDescription());
-        _channel.setVideos(updatedChannel.getVideos());
+        _channel.getVideos().clear();
+        _channel.getVideos().addAll(updatedChannel.getVideos());
         _channel.setCreatedTime(updatedChannel.getCreatedTime());
         channelRepository.save(_channel);
     }
